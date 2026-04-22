@@ -1,0 +1,77 @@
+---
+/* Smart redirect: detect iOS / Android and send to the correct store.
+   Fallback: show both badges. */
+---
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Download Atlas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      body {
+        font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        padding: 24px;
+        background: #F8F9FB;
+        color: #141820;
+        text-align: center;
+      }
+      h1 { font-size: 24px; font-weight: 800; margin-bottom: 8px; color: #1B2A4A; }
+      p { font-size: 15px; color: #4A5268; margin-bottom: 32px; }
+      .badges { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+      .badge {
+        display: flex; align-items: center; gap: 8px;
+        background: #1B2A4A; color: #fff;
+        padding: 10px 20px; border-radius: 8px;
+        text-decoration: none;
+        transition: background 0.15s;
+      }
+      .badge:hover { background: #141E35; }
+      .badge-label { font-size: 10px; opacity: 0.8; }
+      .badge-store { font-size: 16px; font-weight: 600; }
+    </style>
+    <script is:inline>
+      // TODO: replace with real store URLs once approved
+      const IOS_URL = "https://apps.apple.com/app/atlas-workout-tracker/id0000000000";
+      const ANDROID_URL = "https://play.google.com/store/apps/details?id=fit.myatlas.app";
+
+      const ua = navigator.userAgent || "";
+      if (/iPhone|iPad|iPod/i.test(ua)) {
+        window.location.replace(IOS_URL);
+      } else if (/Android/i.test(ua)) {
+        window.location.replace(ANDROID_URL);
+      }
+      // Otherwise: fallback page renders below
+    </script>
+  </head>
+  <body>
+    <h1>Download Atlas</h1>
+    <p>Free workout tracker for everyone.</p>
+    <div class="badges">
+      <a href="https://apps.apple.com/app/atlas-workout-tracker/id0000000000" class="badge">
+        <div>
+          <span class="badge-label">Download on the</span><br />
+          <span class="badge-store">App Store</span>
+        </div>
+      </a>
+      <a href="https://play.google.com/store/apps/details?id=fit.myatlas.app" class="badge">
+        <div>
+          <span class="badge-label">Get it on</span><br />
+          <span class="badge-store">Google Play</span>
+        </div>
+      </a>
+    </div>
+  </body>
+</html>

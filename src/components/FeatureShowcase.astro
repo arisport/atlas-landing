@@ -1,0 +1,127 @@
+---
+const features = [
+  {
+    id: "exercise-library",
+    title: "Exercise Library",
+    description:
+      "800+ exercises with step-by-step photos. Add your own.",
+    gif: "Scrolling exercises, tapping one, seeing start/end photos",
+  },
+  {
+    id: "daily-programming",
+    title: "Daily Programming",
+    description:
+      "One tap to publish. Every member sees today's workout on their phone.",
+    gif: "Owner publishes daily workout → member phone shows it",
+  },
+  {
+    id: "discover-feed",
+    title: "Discover Feed",
+    description:
+      "Community templates from real coaches. Not AI-generated. Not generic.",
+    gif: "Browsing Discover feed, previewing a program",
+  },
+];
+---
+
+<section class="showcase section">
+  <div class="container">
+    <p class="text-overline showcase-label">See it in action</p>
+
+    <div class="showcase-features">
+      {features.map((f, i) => (
+        <div class:list={["showcase-row", { reverse: i % 2 !== 0 }]}>
+          <div class="showcase-text">
+            <h3 class="showcase-title">{f.title}</h3>
+            <p class="showcase-desc">{f.description}</p>
+          </div>
+          <div class="showcase-visual">
+            <div class="gif-placeholder">
+              <span>{f.gif}</span>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .showcase-label {
+    color: var(--coral-600);
+    text-align: center;
+    margin-bottom: var(--space-9);
+  }
+
+  .showcase-features {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-10);
+  }
+
+  .showcase-row {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-7);
+    align-items: center;
+  }
+
+  @media (min-width: 768px) {
+    .showcase-row {
+      flex-direction: row;
+      gap: var(--space-10);
+    }
+
+    .showcase-row.reverse {
+      flex-direction: row-reverse;
+    }
+  }
+
+  .showcase-text {
+    flex: 1;
+  }
+
+  .showcase-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--navy-700);
+    margin-bottom: var(--space-3);
+  }
+
+  .showcase-desc {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--light-text-secondary);
+    max-width: 420px;
+  }
+
+  .showcase-visual {
+    flex-shrink: 0;
+    width: 100%;
+  }
+
+  @media (min-width: 768px) {
+    .showcase-visual {
+      width: 420px;
+    }
+  }
+
+  .gif-placeholder {
+    width: 100%;
+    aspect-ratio: 9 / 16;
+    max-height: 480px;
+    background: var(--light-surface-2);
+    border: 1px dashed var(--light-border);
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-4);
+  }
+
+  .gif-placeholder span {
+    font-size: 13px;
+    color: var(--light-text-muted);
+    text-align: center;
+  }
+</style>

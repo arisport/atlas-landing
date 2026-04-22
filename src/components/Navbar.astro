@@ -1,0 +1,228 @@
+---
+---
+
+<nav class="navbar" id="navbar">
+  <div class="navbar-inner container">
+    <a href="/" class="navbar-logo" aria-label="Atlas home">
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <circle cx="16" cy="16" r="14" fill="var(--navy-700)" />
+        <text
+          x="16"
+          y="21"
+          text-anchor="middle"
+          fill="white"
+          font-family="Plus Jakarta Sans, sans-serif"
+          font-size="16"
+          font-weight="800"
+        >A</text>
+      </svg>
+      <span class="navbar-wordmark">Atlas<span class="dot">.</span></span>
+    </a>
+
+    <div class="navbar-links" id="navbar-links">
+      <a href="https://demo-api.myatlas.fit/admin/" target="_blank" rel="noopener" class="nav-link">
+        Try the Demo
+      </a>
+      <a href="#features" class="nav-link nav-link-mobile">Features</a>
+      <a href="#founding-partner" class="btn btn-coral-sm">
+        Become a Founding Partner
+      </a>
+    </div>
+
+    <button
+      class="navbar-toggle"
+      id="navbar-toggle"
+      aria-label="Toggle menu"
+      aria-expanded="false"
+    >
+      <span class="toggle-bar"></span>
+      <span class="toggle-bar"></span>
+      <span class="toggle-bar"></span>
+    </button>
+  </div>
+
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="https://demo-api.myatlas.fit/admin/" target="_blank" rel="noopener" class="mobile-link">
+      Try the Demo
+    </a>
+    <a href="#features" class="mobile-link">Features</a>
+    <a href="#founding-partner" class="mobile-link mobile-link-cta">
+      Become a Founding Partner
+    </a>
+  </div>
+</nav>
+
+<script>
+  const toggle = document.getElementById("navbar-toggle")!;
+  const menu = document.getElementById("mobile-menu")!;
+  const navbar = document.getElementById("navbar")!;
+
+  toggle.addEventListener("click", () => {
+    const open = menu.classList.toggle("is-open");
+    toggle.classList.toggle("is-open", open);
+    toggle.setAttribute("aria-expanded", String(open));
+  });
+
+  // Close menu on link click
+  menu.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => {
+      menu.classList.remove("is-open");
+      toggle.classList.remove("is-open");
+      toggle.setAttribute("aria-expanded", "false");
+    });
+  });
+
+  // Sticky shadow on scroll
+  let ticking = false;
+  window.addEventListener("scroll", () => {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        navbar.classList.toggle("is-scrolled", window.scrollY > 16);
+        ticking = false;
+      });
+      ticking = true;
+    }
+  });
+</script>
+
+<style>
+  .navbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: var(--light-surface-1);
+    transition: box-shadow var(--duration-normal) var(--ease-default);
+  }
+
+  .navbar.is-scrolled {
+    box-shadow: var(--shadow-sm);
+  }
+
+  .navbar-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+  }
+
+  @media (min-width: 768px) {
+    .navbar-inner {
+      height: 64px;
+    }
+  }
+
+  .navbar-logo {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .navbar-wordmark {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--navy-700);
+    letter-spacing: -0.3px;
+  }
+
+  .dot {
+    color: var(--coral-600);
+  }
+
+  .navbar-links {
+    display: none;
+    align-items: center;
+    gap: var(--space-7);
+  }
+
+  @media (min-width: 768px) {
+    .navbar-links {
+      display: flex;
+    }
+  }
+
+  .nav-link {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--light-text-secondary);
+    transition: color var(--duration-fast) var(--ease-default);
+  }
+
+  .nav-link:hover {
+    color: var(--light-text-primary);
+  }
+
+  .nav-link-mobile {
+    display: none;
+  }
+
+  /* Hamburger */
+  .navbar-toggle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 32px;
+    height: 32px;
+    padding: 4px;
+  }
+
+  @media (min-width: 768px) {
+    .navbar-toggle {
+      display: none;
+    }
+  }
+
+  .toggle-bar {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: var(--navy-700);
+    border-radius: 1px;
+    transition: transform var(--duration-normal) var(--ease-default),
+                opacity var(--duration-fast) var(--ease-default);
+  }
+
+  .navbar-toggle.is-open .toggle-bar:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .navbar-toggle.is-open .toggle-bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  .navbar-toggle.is-open .toggle-bar:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  /* Mobile menu */
+  .mobile-menu {
+    display: none;
+    flex-direction: column;
+    padding: var(--space-4) var(--container-padding) var(--space-6);
+    border-top: 1px solid var(--light-border);
+  }
+
+  .mobile-menu.is-open {
+    display: flex;
+  }
+
+  @media (min-width: 768px) {
+    .mobile-menu {
+      display: none !important;
+    }
+  }
+
+  .mobile-link {
+    display: block;
+    padding: var(--space-3) 0;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--light-text-secondary);
+  }
+
+  .mobile-link-cta {
+    color: var(--coral-600);
+    font-weight: 600;
+    margin-top: var(--space-2);
+  }
+</style>

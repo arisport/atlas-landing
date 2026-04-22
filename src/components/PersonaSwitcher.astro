@@ -1,0 +1,279 @@
+---
+const personas = [
+  {
+    id: "gym-owners",
+    tab: "Gym Owners & Studios",
+    bullets: [
+      "Publish daily workouts — every member sees them instantly",
+      "Run challenges with leaderboards to keep members engaged",
+      "Invite members via email, SMS, or QR code",
+      "Admin dashboard: members, trainers, subscriptions, all in one place",
+    ],
+    screenshot: "Admin dashboard — daily program view",
+    cta: { text: "Become a Founding Partner", href: "#founding-partner" },
+  },
+  {
+    id: "solo-coaches",
+    tab: "Solo Coaches",
+    bullets: [
+      "Build structured programs from 800+ exercises with photo demos",
+      "Assign programs to clients and track their completion",
+      "Publish templates to the Discover feed — get exposure to new clients",
+      "No studio needed. Manage your practice from anywhere.",
+    ],
+    screenshot: "Program builder or exercise picker",
+    cta: { text: "Become a Founding Partner", href: "#founding-partner" },
+  },
+  {
+    id: "physiotherapists",
+    tab: "Physiotherapists",
+    bullets: [
+      "Create recovery protocols with guided exercises",
+      "Assign to patients. Track compliance between sessions.",
+      "800+ exercises with photos — filter by muscle group, equipment, movement pattern",
+      "Atlas is a fitness tracker with tools for rehab professionals — not medical software.",
+    ],
+    screenshot: "Program assignment or exercise library",
+    cta: { text: "Become a Founding Partner", href: "#founding-partner" },
+  },
+  {
+    id: "solo-athletes",
+    tab: "Solo Athletes",
+    bullets: [
+      "Free workout tracker. No gym required. No subscription.",
+      "800+ exercises with photo demos — search, filter, build your own workouts",
+      "Browse community templates from real trainers and coaches",
+      "Join a gym later without losing your workout history",
+    ],
+    screenshot: "Home screen — workout logging",
+    cta: { text: "Download Free", href: "#solo", variant: "outline" },
+  },
+];
+---
+
+<section class="personas section" id="features">
+  <div class="container">
+    <p class="text-overline personas-label">Built for how you work</p>
+
+    <div class="persona-tabs" role="tablist" aria-label="Choose your role">
+      {personas.map((p, i) => (
+        <button
+          role="tab"
+          aria-selected={i === 0 ? "true" : "false"}
+          aria-controls={`panel-${p.id}`}
+          id={`tab-${p.id}`}
+          class:list={["persona-tab", { active: i === 0 }]}
+          data-index={i}
+        >
+          {p.tab}
+        </button>
+      ))}
+    </div>
+
+    <div class="persona-panels">
+      {personas.map((p, i) => (
+        <div
+          role="tabpanel"
+          id={`panel-${p.id}`}
+          aria-labelledby={`tab-${p.id}`}
+          class:list={["persona-panel", { active: i === 0 }]}
+          data-index={i}
+        >
+          <div class="panel-content">
+            <ul class="panel-bullets">
+              {p.bullets.map((b) => (
+                <li>
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <circle cx="10" cy="10" r="10" fill="var(--teal-100)" />
+                    <path d="M6 10l3 3 5-5" stroke="var(--teal-700)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+                  </svg>
+                  <span>{b}</span>
+                </li>
+              ))}
+            </ul>
+            <a
+              href={p.cta.href}
+              class:list={["btn", p.cta.variant === "outline" ? "btn-outline" : "btn-coral"]}
+            >
+              {p.cta.text}
+            </a>
+          </div>
+
+          <div class="panel-visual">
+            <div class="screenshot-placeholder">
+              <span>{p.screenshot}</span>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  const tabs = document.querySelectorAll<HTMLButtonElement>(".persona-tab");
+  const panels = document.querySelectorAll<HTMLDivElement>(".persona-panel");
+
+  tabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      const index = tab.dataset.index;
+
+      tabs.forEach((t) => {
+        t.classList.remove("active");
+        t.setAttribute("aria-selected", "false");
+      });
+      tab.classList.add("active");
+      tab.setAttribute("aria-selected", "true");
+
+      panels.forEach((p) => {
+        p.classList.toggle("active", p.dataset.index === index);
+      });
+    });
+  });
+
+  // Keyboard navigation
+  const tabList = document.querySelector<HTMLDivElement>(".persona-tabs");
+  tabList?.addEventListener("keydown", (e) => {
+    const tabsArray = Array.from(tabs);
+    const current = tabsArray.findIndex((t) => t.classList.contains("active"));
+    let next = current;
+
+    if (e.key === "ArrowRight" || e.key === "ArrowDown") {
+      next = (current + 1) % tabsArray.length;
+      e.preventDefault();
+    } else if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
+      next = (current - 1 + tabsArray.length) % tabsArray.length;
+      e.preventDefault();
+    }
+
+    if (next !== current) {
+      tabsArray[next].click();
+      tabsArray[next].focus();
+    }
+  });
+</script>
+
+<style>
+  .personas-label {
+    color: var(--coral-600);
+    text-align: center;
+    margin-bottom: var(--space-6);
+  }
+
+  .persona-tabs {
+    display: flex;
+    gap: var(--space-2);
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: var(--space-2);
+    margin-bottom: var(--space-7);
+  }
+
+  .persona-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .persona-tab {
+    flex-shrink: 0;
+    padding: var(--space-2) var(--space-5);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--light-text-tertiary);
+    background: var(--light-surface-2);
+    border-radius: var(--radius-full);
+    border: 1.5px solid transparent;
+    transition: all var(--duration-normal) var(--ease-default);
+    white-space: nowrap;
+  }
+
+  .persona-tab:hover {
+    color: var(--light-text-primary);
+    background: var(--light-surface-3);
+  }
+
+  .persona-tab.active {
+    color: var(--navy-700);
+    background: var(--light-surface-1);
+    border-color: var(--navy-200);
+    box-shadow: var(--shadow-sm);
+  }
+
+  /* Panels */
+  .persona-panel {
+    display: none;
+  }
+
+  .persona-panel.active {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-7);
+    animation: fadeIn var(--duration-slow) var(--ease-enter);
+  }
+
+  @media (min-width: 768px) {
+    .persona-panel.active {
+      flex-direction: row;
+      align-items: flex-start;
+    }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .panel-content {
+    flex: 1;
+  }
+
+  .panel-bullets {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    margin-bottom: var(--space-7);
+  }
+
+  .panel-bullets li {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-3);
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--light-text-secondary);
+  }
+
+  .panel-bullets li svg {
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  /* Screenshot placeholder */
+  .panel-visual {
+    flex-shrink: 0;
+  }
+
+  @media (min-width: 768px) {
+    .panel-visual {
+      width: 400px;
+    }
+  }
+
+  .screenshot-placeholder {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    background: var(--light-surface-2);
+    border: 1px dashed var(--light-border);
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-4);
+  }
+
+  .screenshot-placeholder span {
+    font-size: 13px;
+    color: var(--light-text-muted);
+    text-align: center;
+  }
+</style>

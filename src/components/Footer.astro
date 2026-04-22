@@ -1,0 +1,171 @@
+---
+---
+
+<footer class="footer">
+  <div class="footer-inner container">
+    <div class="footer-brand">
+      <a href="/" class="footer-logo" aria-label="Atlas home">
+        <svg width="28" height="28" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+          <circle cx="16" cy="16" r="14" fill="var(--navy-700)" />
+          <text
+            x="16"
+            y="21"
+            text-anchor="middle"
+            fill="white"
+            font-family="Plus Jakarta Sans, sans-serif"
+            font-size="16"
+            font-weight="800"
+          >A</text>
+        </svg>
+        <span>Atlas<span class="dot">.</span></span>
+      </a>
+      <p class="footer-tagline">
+        The fitness platform for gyms, coaches, and rehab professionals.
+      </p>
+    </div>
+
+    <div class="footer-badges" id="solo">
+      <a href="/download" class="badge-link" aria-label="Download on the App Store">
+        <div class="store-badge">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+          </svg>
+          <div>
+            <span class="badge-label">Download on the</span>
+            <span class="badge-store">App Store</span>
+          </div>
+        </div>
+      </a>
+      <a href="/download" class="badge-link" aria-label="Get it on Google Play">
+        <div class="store-badge">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M3 20.5v-17c0-.59.34-1.11.84-1.35L13.69 12l-9.85 9.85c-.5-.24-.84-.76-.84-1.35zm13.81-5.38L6.05 21.34l8.49-8.49 2.27 2.27zm.91-.91L19.99 12l-2.27-2.21-2.56 2.56 2.56 2.56zM6.05 2.66l10.76 6.22-2.27 2.27-8.49-8.49z"/>
+          </svg>
+          <div>
+            <span class="badge-label">Get it on</span>
+            <span class="badge-store">Google Play</span>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <div class="footer-links">
+      <a href="https://demo-api.myatlas.fit/admin/" target="_blank" rel="noopener">Demo</a>
+      <span class="footer-sep" aria-hidden="true">|</span>
+      <a href="/terms">Terms</a>
+      <span class="footer-sep" aria-hidden="true">|</span>
+      <a href="/privacy">Privacy</a>
+    </div>
+
+    <p class="footer-copy">&copy; 2026 Atlas. All rights reserved.</p>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--light-surface-2);
+    padding-block: var(--space-9) var(--space-7);
+  }
+
+  .footer-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-6);
+    text-align: center;
+  }
+
+  .footer-brand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .footer-logo {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--navy-700);
+  }
+
+  .dot {
+    color: var(--coral-600);
+  }
+
+  .footer-tagline {
+    font-size: 13px;
+    color: var(--light-text-tertiary);
+    max-width: 320px;
+  }
+
+  /* Store badges */
+  .footer-badges {
+    display: flex;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .badge-link {
+    display: block;
+  }
+
+  .store-badge {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    background: var(--navy-700);
+    color: #fff;
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--radius-sm);
+    transition: background-color var(--duration-fast) var(--ease-default);
+  }
+
+  .store-badge:hover {
+    background: var(--navy-800);
+  }
+
+  .badge-label {
+    display: block;
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 1;
+    opacity: 0.8;
+  }
+
+  .badge-store {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+
+  /* Links */
+  .footer-links {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    font-size: 13px;
+  }
+
+  .footer-links a {
+    color: var(--light-text-tertiary);
+    transition: color var(--duration-fast) var(--ease-default);
+  }
+
+  .footer-links a:hover {
+    color: var(--light-text-primary);
+  }
+
+  .footer-sep {
+    color: var(--light-border);
+  }
+
+  .footer-copy {
+    font-size: 12px;
+    color: var(--light-text-muted);
+  }
+</style>
