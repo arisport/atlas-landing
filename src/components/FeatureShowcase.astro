@@ -1,30 +1,49 @@
 ---
 const features = [
   {
-    id: "exercise-library",
-    title: "Exercise Library",
+    id: "workout-logging",
+    title: "Smart Workout Logging",
+    headline: "Your last session, pre-filled. PRs, detected automatically.",
     description:
-      "800+ exercises with step-by-step photos. Add your own.",
-    gif: "Scrolling exercises, tapping one, seeing start/end photos",
+      "Log sets and the app remembers your last weight. Hit a personal record and it tells you. Pause mid-workout and pick up where you left off.",
+    gif: "Logging a set, seeing last-session weight pre-filled, PR badge appears",
   },
   {
-    id: "daily-programming",
-    title: "Daily Programming",
+    id: "daily-programs",
+    title: "Daily Programs",
+    headline: "One tap to publish. Every member sees today's workout.",
     description:
-      "One tap to publish. Every member sees today's workout on their phone.",
-    gif: "Owner publishes daily workout → member phone shows it",
+      "Create a program, assign it to a date. Members open the app and get a push notification. Reuse yesterday's program or build from scratch.",
+    gif: "Owner publishes daily workout → member phone shows push notification",
   },
   {
-    id: "discover-feed",
+    id: "challenges",
+    title: "Challenges & Leaderboards",
+    headline: "Set a target. Watch your members chase it.",
+    description:
+      "Monthly challenges — total sessions, volume, or cardio minutes. Members opt in, progress updates automatically, and the leaderboard keeps them coming back.",
+    gif: "Leaderboard updating as members complete workouts",
+  },
+  {
+    id: "onboarding",
+    title: "Effortless Onboarding",
+    headline: "Invite one member or a hundred. They see your brand from the first tap.",
+    description:
+      "Upload a CSV to invite your whole roster, or send individual links by email and text. Members enter your gym code and immediately see your logo, your name, and a verified badge. No manual setup on their end.",
+    gif: "Entering gym code → branded verification card animates in with gym logo",
+  },
+  {
+    id: "discover",
     title: "Discover Feed",
+    headline: "Publish your best programs. Your gym name goes with every template.",
     description:
-      "Community templates from real coaches. Not AI-generated. Not generic.",
-    gif: "Browsing Discover feed, previewing a program",
+      "Submit a program template to the Discover feed — it's free. Athletes browse by category, bookmark your work, and start workouts directly. Every template links back to your gym.",
+    gif: "Browsing Discover feed, filtering by category, previewing a program",
   },
 ];
 ---
 
-<section class="showcase section">
+<section class="showcase section" id="showcase">
   <div class="container">
     <p class="text-overline showcase-label">See it in action</p>
 
@@ -33,6 +52,7 @@ const features = [
         <div class:list={["showcase-row", { reverse: i % 2 !== 0 }]}>
           <div class="showcase-text">
             <h3 class="showcase-title">{f.title}</h3>
+            <p class="showcase-headline">{f.headline}</p>
             <p class="showcase-desc">{f.description}</p>
           </div>
           <div class="showcase-visual">
@@ -82,17 +102,27 @@ const features = [
   }
 
   .showcase-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--coral-600);
+    margin-bottom: var(--space-2);
+  }
+
+  .showcase-headline {
     font-size: 22px;
     font-weight: 700;
+    line-height: 1.3;
     color: var(--navy-700);
     margin-bottom: var(--space-3);
   }
 
   .showcase-desc {
-    font-size: 16px;
+    font-size: 15px;
     line-height: 1.6;
     color: var(--light-text-secondary);
-    max-width: 420px;
+    max-width: 440px;
   }
 
   .showcase-visual {
@@ -102,7 +132,7 @@ const features = [
 
   @media (min-width: 768px) {
     .showcase-visual {
-      width: 420px;
+      width: 380px;
     }
   }
 
