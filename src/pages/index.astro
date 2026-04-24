@@ -15,8 +15,63 @@ import Footer from "../components/Footer.astro";
     <Hero />
     <PersonaSwitcher />
     <FeatureShowcase />
+
+    <section class="cta-bridge">
+      <div class="cta-bridge-inner">
+        <p class="cta-bridge-text">Ready to get started?</p>
+        <a href="#apply" class="cta-bridge-btn">Become a Founding Partner</a>
+      </div>
+    </section>
+
     <FoundingPartner />
     <ComingSoon />
   </main>
   <Footer />
+<style>
+  .cta-bridge {
+    padding: var(--space-9) var(--space-5);
+    background: var(--light-surface-2);
+  }
+
+  .cta-bridge-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-4);
+    text-align: center;
+  }
+
+  @media (min-width: 768px) {
+    .cta-bridge-inner {
+      flex-direction: row;
+      justify-content: center;
+      gap: var(--space-7);
+    }
+  }
+
+  .cta-bridge-text {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--navy-700);
+  }
+
+  .cta-bridge-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-primary);
+    font-size: 14px;
+    font-weight: 600;
+    padding: var(--space-3) var(--space-6);
+    border-radius: var(--radius-full);
+    background-color: var(--coral-600);
+    color: #fff;
+    text-decoration: none;
+    transition: background-color 0.2s;
+  }
+
+  .cta-bridge-btn:hover {
+    background-color: var(--coral-700);
+  }
+</style>
 </Layout>

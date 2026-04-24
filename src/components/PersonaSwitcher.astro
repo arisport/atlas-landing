@@ -6,10 +6,13 @@ const personas = [
     bullets: [
       "Publish daily workouts — every member sees them instantly",
       "Run challenges with leaderboards to keep members engaged",
-      "Invite members by email, text, or gym code — one at a time or bulk CSV",
+      "Invite one member or a hundred — by email, text, gym code, or bulk CSV upload",
+      "Members enter your gym code and see your logo and brand from the first tap",
+      "Publish programs to the Discover feed — your gym name goes with every template",
       "Admin dashboard: members, trainers, programs — all in one place",
     ],
-    screenshot: "Admin dashboard — daily program view",
+    screenshot: "/images/screenshots/home_screen_gym_member.png",
+    screenshotAlt: "Atlas gym owner view — daily programs, challenges, member management",
     cta: { text: "Become a Founding Partner", href: "#founding-partner" },
   },
   {
@@ -18,10 +21,12 @@ const personas = [
     bullets: [
       "Build structured programs from 800+ exercises with photo demos",
       "Assign programs to clients and track their completion",
+      "Invite clients by link or code — they see your name from the first tap",
       "Publish templates to the Discover feed — your name goes with every program",
       "No studio needed. Manage your practice from anywhere.",
     ],
-    screenshot: "Program builder or exercise picker",
+    screenshot: "/images/screenshots/home_screen_gym_member.png",
+    screenshotAlt: "Atlas coach view — program builder and client assignments",
     cta: { text: "Become a Founding Partner", href: "#founding-partner" },
   },
   {
@@ -29,11 +34,13 @@ const personas = [
     tab: "Physiotherapists",
     bullets: [
       "Create recovery protocols with guided exercises",
-      "Assign to patients. See when they complete their exercises.",
+      "Assign to patients — see when they complete their exercises",
+      "Invite patients by link or code — they see your practice name instantly",
       "800+ exercises with photos — filter by muscle group, equipment, movement pattern",
-      "Atlas is a fitness tracker with tools for rehab professionals — not medical software.",
+      "Atlas is a fitness tracker with tools for rehab professionals — not medical software",
     ],
-    screenshot: "Program assignment or exercise library",
+    screenshot: "/images/screenshots/home_screen_gym_member.png",
+    screenshotAlt: "Atlas physio view — recovery protocols and exercise library",
     cta: { text: "Become a Founding Partner", href: "#founding-partner" },
   },
   {
@@ -42,10 +49,12 @@ const personas = [
     bullets: [
       "Free workout tracker. No gym required. No subscription.",
       "800+ exercises with photo demos — search, filter, build your own workouts",
-      "Browse community templates from real trainers and coaches",
+      "Browse community templates from real trainers and coaches on Discover",
+      "Bookmark programs and start workouts directly from the feed",
       "Join a gym later without losing your workout history",
     ],
-    screenshot: "Home screen — workout logging",
+    screenshot: "/images/screenshots/home_screen_solo_athletes.png",
+    screenshotAlt: "Atlas solo athlete view — personal workout tracking without a gym",
     cta: { text: "Download Free", href: "/download", variant: "outline" },
   },
 ];
@@ -53,33 +62,50 @@ const personas = [
 
 <section class="personas section" id="features">
   <div class="container">
-    <p class="text-overline personas-label">Built for how you work</p>
+    <div class="persona-layout">
+      <div class="persona-right">
+        <div class="phone-frame">
+          <div class="phone-screen">
+            <img
+              id="persona-screenshot"
+              src="/images/screenshots/home_screen_gym_member.webp"
+              alt="Atlas app screenshot"
+              class="screenshot-img"
+              width="600"
+              height="1303"
+            />
+          </div>
+        </div>
+      </div>
 
-    <div class="persona-tabs" role="tablist" aria-label="Choose your role">
-      {personas.map((p, i) => (
-        <button
-          role="tab"
-          aria-selected={i === 0 ? "true" : "false"}
-          aria-controls={`panel-${p.id}`}
-          id={`tab-${p.id}`}
-          class:list={["persona-tab", { active: i === 0 }]}
-          data-index={i}
-        >
-          {p.tab}
-        </button>
-      ))}
-    </div>
+      <div class="persona-left">
+        <p class="text-overline personas-label">Built for how you work</p>
 
-    <div class="persona-panels">
-      {personas.map((p, i) => (
-        <div
-          role="tabpanel"
-          id={`panel-${p.id}`}
-          aria-labelledby={`tab-${p.id}`}
-          class:list={["persona-panel", { active: i === 0 }]}
-          data-index={i}
-        >
-          <div class="panel-content">
+        <div class="persona-tabs-wrap">
+          <div class="persona-tabs" role="tablist" aria-label="Choose your role">
+            {personas.map((p, i) => (
+              <button
+                role="tab"
+                aria-selected={i === 0 ? "true" : "false"}
+                aria-controls={`panel-${p.id}`}
+                id={`tab-${p.id}`}
+                class:list={["persona-tab", { active: i === 0 }]}
+                data-index={i}
+              >
+                {p.tab}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {personas.map((p, i) => (
+          <div
+            role="tabpanel"
+            id={`panel-${p.id}`}
+            aria-labelledby={`tab-${p.id}`}
+            class:list={["persona-panel", { active: i === 0 }]}
+            data-index={i}
+          >
             <ul class="panel-bullets">
               {p.bullets.map((b) => (
                 <li>
@@ -98,14 +124,8 @@ const personas = [
               {p.cta.text}
             </a>
           </div>
-
-          <div class="panel-visual">
-            <div class="screenshot-placeholder">
-              <span>{p.screenshot}</span>
-            </div>
-          </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   </div>
 </section>
@@ -113,6 +133,14 @@ const personas = [
 <script>
   const tabs = document.querySelectorAll<HTMLButtonElement>(".persona-tab");
   const panels = document.querySelectorAll<HTMLDivElement>(".persona-panel");
+  const screenshotImg = document.getElementById("persona-screenshot") as HTMLImageElement;
+
+  const screenshots = [
+    "/images/screenshots/home_screen_gym_member.webp",
+    "/images/screenshots/home_screen_gym_member.webp",
+    "/images/screenshots/home_screen_gym_member.webp",
+    "/images/screenshots/home_screen_solo_athletes.webp",
+  ];
 
   tabs.forEach((tab) => {
     tab.addEventListener("click", () => {
@@ -128,6 +156,11 @@ const personas = [
       panels.forEach((p) => {
         p.classList.toggle("active", p.dataset.index === index);
       });
+
+      const newSrc = screenshots[Number(index)];
+      if (screenshotImg && screenshotImg.src !== newSrc) {
+        screenshotImg.src = newSrc;
+      }
     });
   });
 
@@ -154,10 +187,68 @@ const personas = [
 </script>
 
 <style>
+  .persona-layout {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  @media (min-width: 768px) {
+    .persona-layout {
+      flex-direction: row;
+      align-items: center;
+      gap: var(--space-10);
+    }
+  }
+
+  .persona-left {
+    flex: 1;
+    order: 1;
+  }
+
+  .persona-right {
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    order: 2;
+  }
+
+  /* On mobile: text first, phone second */
+  @media (max-width: 767px) {
+    .persona-left { order: 1; }
+    .persona-right { order: 2; }
+  }
+
+  /* On desktop: phone left, text right */
+  @media (min-width: 768px) {
+    .persona-right { order: -1; }
+  }
+
   .personas-label {
     color: var(--coral-600);
-    text-align: center;
-    margin-bottom: var(--space-6);
+    margin-bottom: var(--space-3);
+  }
+
+  .persona-tabs-wrap {
+    position: relative;
+    margin-bottom: var(--space-4);
+  }
+
+  .persona-tabs-wrap::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 40px;
+    background: linear-gradient(to right, transparent, var(--light-bg));
+    pointer-events: none;
+  }
+
+  @media (min-width: 768px) {
+    .persona-tabs-wrap::after {
+      display: none;
+    }
   }
 
   .persona-tabs {
@@ -167,7 +258,6 @@ const personas = [
     scrollbar-width: none;
     -webkit-overflow-scrolling: touch;
     padding-bottom: var(--space-2);
-    margin-bottom: var(--space-7);
   }
 
   .persona-tabs::-webkit-scrollbar {
@@ -205,17 +295,8 @@ const personas = [
   }
 
   .persona-panel.active {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-7);
+    display: block;
     animation: fadeIn var(--duration-slow) var(--ease-enter);
-  }
-
-  @media (min-width: 768px) {
-    .persona-panel.active {
-      flex-direction: row;
-      align-items: flex-start;
-    }
   }
 
   @keyframes fadeIn {
@@ -223,15 +304,11 @@ const personas = [
     to { opacity: 1; transform: translateY(0); }
   }
 
-  .panel-content {
-    flex: 1;
-  }
-
   .panel-bullets {
     display: flex;
     flex-direction: column;
-    gap: var(--space-4);
-    margin-bottom: var(--space-7);
+    gap: var(--space-3);
+    margin-bottom: var(--space-5);
   }
 
   .panel-bullets li {
@@ -248,32 +325,36 @@ const personas = [
     margin-top: 2px;
   }
 
-  /* Screenshot placeholder */
-  .panel-visual {
-    flex-shrink: 0;
+  /* Phone mockup */
+  .phone-frame {
+    width: 220px;
+    height: 440px;
+    background: var(--navy-800);
+    border-radius: var(--radius-2xl);
+    padding: var(--space-3);
+    box-shadow: var(--shadow-lg);
   }
 
   @media (min-width: 768px) {
-    .panel-visual {
-      width: 400px;
+    .phone-frame {
+      width: 240px;
+      height: 480px;
     }
   }
 
-  .screenshot-placeholder {
+  .phone-screen {
     width: 100%;
-    aspect-ratio: 4 / 3;
-    background: var(--light-surface-2);
-    border: 1px dashed var(--light-border);
-    border-radius: var(--radius-md);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: var(--space-4);
+    height: 100%;
+    background: var(--navy-900);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
   }
 
-  .screenshot-placeholder span {
-    font-size: 13px;
-    color: var(--light-text-muted);
-    text-align: center;
+  .screenshot-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    display: block;
   }
 </style>

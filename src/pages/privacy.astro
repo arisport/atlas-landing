@@ -1,0 +1,49 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Privacy Policy — Atlas">
+  <main class="legal">
+    <div class="container">
+      <h1>Privacy Policy</h1>
+      <p class="updated">Last updated: April 2026</p>
+      <p>Atlas collects only what is needed to run the platform: your name, email, phone number, and workout data. We do not sell your data to third parties.</p>
+      <p>Workout data belongs to you. If you delete your account, your data is permanently removed.</p>
+      <p>We use error monitoring (Sentry) to fix bugs and analytics (Meta Pixel, TikTok Pixel) on the landing page only to measure ad performance. The mobile app does not contain ad trackers.</p>
+      <p>A full privacy policy will be published before the public launch. If you have questions, contact us at <a href="mailto:aris@myatlas.fit">aris@myatlas.fit</a>.</p>
+      <a href="/" class="back-link">Back to home</a>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .legal {
+    padding: 80px 0;
+    min-height: 60vh;
+  }
+  h1 {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--navy-700);
+    margin-bottom: 8px;
+  }
+  .updated {
+    font-size: 13px;
+    color: var(--light-text-tertiary);
+    margin-bottom: 32px;
+  }
+  p {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--light-text-secondary);
+    max-width: 640px;
+    margin-bottom: 16px;
+  }
+  a { color: var(--coral-600); }
+  .back-link {
+    display: inline-block;
+    margin-top: 24px;
+    font-size: 14px;
+    font-weight: 600;
+  }
+</style>

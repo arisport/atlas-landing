@@ -71,6 +71,7 @@
   --radius-md: 12px;
   --radius-lg: 16px;
   --radius-xl: 28px;
+  --radius-2xl: 36px;
   --radius-full: 9999px;
 
   /* Shadows (web only) */
@@ -187,7 +188,8 @@ ol {
   font-size: 14px;
   font-weight: 600;
   line-height: 1.4;
-  padding: var(--space-3) var(--space-6);
+  padding: var(--space-4) var(--space-6);
+  min-height: 44px;
   border-radius: var(--radius-full);
   transition: background-color var(--duration-normal) var(--ease-default),
               transform var(--duration-fast) var(--ease-default);
@@ -196,6 +198,30 @@ ol {
 
 .btn:active {
   transform: scale(0.97);
+}
+
+/* ── Focus indicators (keyboard only) ─────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--coral-600);
+  outline-offset: 2px;
+}
+
+/* Skip-to-content link */
+.skip-to-content {
+  position: absolute;
+  left: -9999px;
+  top: var(--space-2);
+  z-index: 9999;
+  padding: var(--space-3) var(--space-5);
+  background: var(--coral-600);
+  color: #fff;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  text-decoration: none;
+}
+
+.skip-to-content:focus {
+  left: var(--space-4);
 }
 
 .btn-coral {

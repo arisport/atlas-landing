@@ -1,20 +1,31 @@
 ---
 const features = [
   {
+    id: "assigned-programs",
+    title: "Assigned Programs",
+    headline: "Build a program. Assign it to a client. They see it instantly.",
+    description:
+      "Create structured programs from 800+ exercises. Assign to individual clients or groups. Members open the app and their program is waiting — your name on every template.",
+    video: "/images/videos/assigned_programs.mp4",
+    poster: "/images/videos/assigned_programs_poster.jpg",
+  },
+  {
+    id: "onboarding",
+    title: "Effortless Onboarding",
+    headline: "Invite one member or a hundred. Your brand from the first tap.",
+    description:
+      "Send a link, share a gym code, or upload a CSV. Members join in seconds and immediately see your logo, your name, and a verified badge. No manual setup on their end.",
+    video: "/images/videos/verify_gym_code.mp4",
+    poster: "/images/videos/verify_gym_code_poster.jpg",
+  },
+  {
     id: "workout-logging",
     title: "Smart Workout Logging",
     headline: "Your last session, pre-filled. PRs, detected automatically.",
     description:
-      "Log sets and the app remembers your last weight. Hit a personal record and it tells you. Pause mid-workout and pick up where you left off.",
-    gif: "Logging a set, seeing last-session weight pre-filled, PR badge appears",
-  },
-  {
-    id: "daily-programs",
-    title: "Daily Programs",
-    headline: "One tap to publish. Every member sees today's workout.",
-    description:
-      "Create a program, assign it to a date. Members open the app and get a push notification. Reuse yesterday's program or build from scratch.",
-    gif: "Owner publishes daily workout → member phone shows push notification",
+      "Members log sets and the app remembers their last weight. Hit a personal record and it tells them. Pause mid-workout and pick up where they left off.",
+    video: "/images/videos/workout_screen.mp4",
+    poster: "/images/videos/workout_screen_poster.jpg",
   },
   {
     id: "challenges",
@@ -22,30 +33,15 @@ const features = [
     headline: "Set a target. Watch your members chase it.",
     description:
       "Monthly challenges — total sessions, volume, or cardio minutes. Members opt in, progress updates automatically, and the leaderboard keeps them coming back.",
-    gif: "Leaderboard updating as members complete workouts",
-  },
-  {
-    id: "onboarding",
-    title: "Effortless Onboarding",
-    headline: "Invite one member or a hundred. They see your brand from the first tap.",
-    description:
-      "Upload a CSV to invite your whole roster, or send individual links by email and text. Members enter your gym code and immediately see your logo, your name, and a verified badge. No manual setup on their end.",
-    gif: "Entering gym code → branded verification card animates in with gym logo",
-  },
-  {
-    id: "discover",
-    title: "Discover Feed",
-    headline: "Publish your best programs. Your gym name goes with every template.",
-    description:
-      "Submit a program template to the Discover feed — it's free. Athletes browse by category, bookmark your work, and start workouts directly. Every template links back to your gym.",
-    gif: "Browsing Discover feed, filtering by category, previewing a program",
+    video: "/images/videos/challenges_screen.mp4",
+    poster: "/images/videos/challenges_screen_poster.jpg",
   },
 ];
 ---
 
 <section class="showcase section" id="showcase">
   <div class="container">
-    <p class="text-overline showcase-label">See it in action</p>
+    <h2 class="showcase-heading">See it in action</h2>
 
     <div class="showcase-features">
       {features.map((f, i) => (
@@ -56,8 +52,17 @@ const features = [
             <p class="showcase-desc">{f.description}</p>
           </div>
           <div class="showcase-visual">
-            <div class="gif-placeholder">
-              <span>{f.gif}</span>
+            <div class="phone-frame">
+              <div class="phone-screen">
+                <video
+                  data-src={f.video}
+                  poster={f.poster}
+                  muted
+                  loop
+                  playsinline
+                  class="showcase-video"
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -67,28 +72,35 @@ const features = [
 </section>
 
 <style>
-  .showcase-label {
-    color: var(--coral-600);
+  .showcase {
+    padding-top: calc(var(--section-gap) - 50px);
+  }
+
+  .showcase-heading {
     text-align: center;
+    font-size: clamp(24px, 4vw, 36px);
+    font-weight: 800;
+    color: var(--navy-700);
     margin-bottom: var(--space-9);
   }
 
   .showcase-features {
     display: flex;
     flex-direction: column;
-    gap: var(--space-10);
+    gap: var(--space-9);
   }
 
   .showcase-row {
     display: flex;
     flex-direction: column;
-    gap: var(--space-7);
+    gap: var(--space-6);
     align-items: center;
   }
 
   @media (min-width: 768px) {
     .showcase-row {
       flex-direction: row;
+      align-items: center;
       gap: var(--space-10);
     }
 
@@ -127,31 +139,60 @@ const features = [
 
   .showcase-visual {
     flex-shrink: 0;
-    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .phone-frame {
+    width: 220px;
+    height: 440px;
+    background: var(--navy-800);
+    border-radius: var(--radius-2xl);
+    padding: var(--space-3);
+    box-shadow: var(--shadow-lg);
   }
 
   @media (min-width: 768px) {
-    .showcase-visual {
-      width: 380px;
+    .phone-frame {
+      width: 240px;
+      height: 480px;
     }
   }
 
-  .gif-placeholder {
+  .phone-screen {
     width: 100%;
-    aspect-ratio: 9 / 16;
-    max-height: 480px;
-    background: var(--light-surface-2);
-    border: 1px dashed var(--light-border);
-    border-radius: var(--radius-lg);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: var(--space-4);
+    height: 100%;
+    background: var(--navy-900);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
   }
 
-  .gif-placeholder span {
-    font-size: 13px;
-    color: var(--light-text-muted);
-    text-align: center;
+  .showcase-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    display: block;
   }
 </style>
+
+<script>
+  // Lazy-load videos when they scroll into view
+  const videos = document.querySelectorAll<HTMLVideoElement>('.showcase-video');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const video = entry.target as HTMLVideoElement;
+        const src = video.dataset.src;
+        if (src && !video.src) {
+          video.src = src;
+          video.autoplay = true;
+          video.play().catch(() => {});
+        }
+        observer.unobserve(video);
+      }
+    });
+  }, { rootMargin: '200px' });
+
+  videos.forEach((video) => observer.observe(video));
+</script>
