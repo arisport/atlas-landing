@@ -254,6 +254,19 @@ ol {
   background-color: var(--coral-50);
 }
 
+.btn-outline-navy-sm {
+  background-color: transparent;
+  color: var(--navy-700);
+  border: 1.5px solid var(--navy-700);
+  padding: calc(var(--space-2) - 1.5px) calc(var(--space-4) - 1.5px);
+  font-size: 13px;
+}
+
+.btn-outline-navy-sm:hover {
+  background-color: var(--navy-700);
+  color: #fff;
+}
+
 /* ── Section spacing ───────────────────────────────────────── */
 .section {
   padding-block: var(--section-gap);

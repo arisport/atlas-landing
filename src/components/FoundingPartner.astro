@@ -110,7 +110,42 @@
         <div class="form-row">
           <div class="form-group">
             <label for="phone_number">Phone</label>
-            <input type="tel" id="phone_number" name="phone_number" required autocomplete="tel" />
+            <div class="phone-input">
+              <select id="phone_country" name="phone_country" aria-label="Country code" required>
+                <option value="+44" data-flag="GB" selected>GB +44</option>
+                <option value="+353" data-flag="IE">IE +353</option>
+                <option value="+357" data-flag="CY">CY +357</option>
+                <option value="+30" data-flag="GR">GR +30</option>
+                <option value="+1" data-flag="US">US +1</option>
+                <option value="+34" data-flag="ES">ES +34</option>
+                <option value="+351" data-flag="PT">PT +351</option>
+                <option value="+33" data-flag="FR">FR +33</option>
+                <option value="+49" data-flag="DE">DE +49</option>
+                <option value="+39" data-flag="IT">IT +39</option>
+                <option value="+31" data-flag="NL">NL +31</option>
+                <option value="+32" data-flag="BE">BE +32</option>
+                <option value="+43" data-flag="AT">AT +43</option>
+                <option value="+41" data-flag="CH">CH +41</option>
+                <option value="+46" data-flag="SE">SE +46</option>
+                <option value="+47" data-flag="NO">NO +47</option>
+                <option value="+45" data-flag="DK">DK +45</option>
+                <option value="+358" data-flag="FI">FI +358</option>
+                <option value="+48" data-flag="PL">PL +48</option>
+                <option value="+61" data-flag="AU">AU +61</option>
+                <option value="+64" data-flag="NZ">NZ +64</option>
+                <option value="+971" data-flag="AE">AE +971</option>
+              </select>
+              <input
+                type="tel"
+                id="phone_number"
+                name="phone_number"
+                required
+                autocomplete="tel-national"
+                inputmode="numeric"
+                pattern="[0-9 \-]{6,}"
+                placeholder="7700 900123"
+              />
+            </div>
           </div>
           <div class="form-group">
             <label for="gym_name">Gym / practice name</label>
@@ -166,7 +201,12 @@
     submitBtn.disabled = true;
     submitBtn.textContent = "Submitting...";
 
-    const data = Object.fromEntries(new FormData(form));
+    const data = Object.fromEntries(new FormData(form)) as Record<string, string>;
+
+    const countryCode = data.phone_country ?? "";
+    const localNumber = (data.phone_number ?? "").replace(/\D/g, "").replace(/^0+/, "");
+    data.phone_number = countryCode + localNumber;
+    delete data.phone_country;
 
     try {
       const res = await fetch(API_URL, {
@@ -393,6 +433,25 @@
   .form-group textarea {
     resize: vertical;
     min-height: 80px;
+  }
+
+  /* Phone input: country select + number input */
+  .phone-input {
+    display: flex;
+    gap: var(--space-2);
+  }
+
+  .phone-input select {
+    flex: 0 0 auto;
+    width: auto;
+    min-width: 96px;
+    padding-right: 32px;
+    background-position: right 10px center;
+  }
+
+  .phone-input input {
+    flex: 1;
+    min-width: 0;
   }
 
   .form-submit {
