@@ -1,4 +1,5 @@
 ---
+import "intl-tel-input/styles";
 ---
 
 <section class="founding section" id="founding-partner">
@@ -108,42 +109,14 @@
         <div class="form-row">
           <div class="form-group">
             <label for="phone_number">Phone</label>
-            <div class="phone-input">
-              <select id="phone_country" name="phone_country" aria-label="Country code" required>
-                <option value="+44" data-flag="GB" selected>GB +44</option>
-                <option value="+353" data-flag="IE">IE +353</option>
-                <option value="+357" data-flag="CY">CY +357</option>
-                <option value="+30" data-flag="GR">GR +30</option>
-                <option value="+1" data-flag="US">US +1</option>
-                <option value="+34" data-flag="ES">ES +34</option>
-                <option value="+351" data-flag="PT">PT +351</option>
-                <option value="+33" data-flag="FR">FR +33</option>
-                <option value="+49" data-flag="DE">DE +49</option>
-                <option value="+39" data-flag="IT">IT +39</option>
-                <option value="+31" data-flag="NL">NL +31</option>
-                <option value="+32" data-flag="BE">BE +32</option>
-                <option value="+43" data-flag="AT">AT +43</option>
-                <option value="+41" data-flag="CH">CH +41</option>
-                <option value="+46" data-flag="SE">SE +46</option>
-                <option value="+47" data-flag="NO">NO +47</option>
-                <option value="+45" data-flag="DK">DK +45</option>
-                <option value="+358" data-flag="FI">FI +358</option>
-                <option value="+48" data-flag="PL">PL +48</option>
-                <option value="+61" data-flag="AU">AU +61</option>
-                <option value="+64" data-flag="NZ">NZ +64</option>
-                <option value="+971" data-flag="AE">AE +971</option>
-              </select>
-              <input
-                type="tel"
-                id="phone_number"
-                name="phone_number"
-                required
-                autocomplete="tel-national"
-                inputmode="numeric"
-                pattern="[0-9 \-]{6,}"
-                placeholder="7700 900123"
-              />
-            </div>
+            <input
+              type="tel"
+              id="phone_number"
+              name="phone_number"
+              required
+              autocomplete="tel"
+              inputmode="numeric"
+            />
           </div>
           <div class="form-group">
             <label for="gym_name">Gym / practice name</label>
@@ -179,20 +152,38 @@
 </section>
 
 <script>
+  import intlTelInput from "intl-tel-input";
+
   const form = document.getElementById("apply-form") as HTMLFormElement;
   const feedback = document.getElementById("form-feedback")!;
   const submitBtn = document.getElementById("form-submit") as HTMLButtonElement;
+  const phoneInput = document.getElementById("phone_number") as HTMLInputElement;
 
   const API_URL = "https://api.myatlas.fit/api/v1/onboarding/apply/";
+
+  const iti = intlTelInput(phoneInput, {
+    initialCountry: "cy",
+    separateDialCode: true,
+    preferredCountries: ["cy", "gr", "gb", "ie", "us"],
+    loadUtils: () => import("intl-tel-input/utils"),
+  });
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
     feedback.textContent = "";
     feedback.className = "form-feedback";
 
-    // Client-side validation
+    // Client-side validation — let the browser handle native fields,
+    // and intl-tel-input handle phone format.
     if (!form.checkValidity()) {
       form.reportValidity();
+      return;
+    }
+
+    if (!iti.isValidNumber()) {
+      feedback.textContent = "Please enter a valid phone number for the selected country.";
+      feedback.className = "form-feedback error";
+      phoneInput.focus();
       return;
     }
 
@@ -200,11 +191,7 @@
     submitBtn.textContent = "Submitting...";
 
     const data = Object.fromEntries(new FormData(form)) as Record<string, string>;
-
-    const countryCode = data.phone_country ?? "";
-    const localNumber = (data.phone_number ?? "").replace(/\D/g, "").replace(/^0+/, "");
-    data.phone_number = countryCode + localNumber;
-    delete data.phone_country;
+    data.phone_number = iti.getNumber();  // E.164 format, e.g. "+35799138987"
 
     try {
       const res = await fetch(API_URL, {
@@ -437,23 +424,67 @@
     min-height: 80px;
   }
 
-  /* Phone input: country select + number input */
-  .phone-input {
-    display: flex;
-    gap: var(--space-2);
+  /* intl-tel-input — match Atlas dark form theme */
+  :global(.iti) {
+    width: 100%;
   }
 
-  .phone-input select {
-    flex: 0 0 auto;
-    width: auto;
-    min-width: 96px;
-    padding-right: 32px;
-    background-position: right 10px center;
+  :global(.iti__tel-input) {
+    width: 100%;
+    padding: var(--space-3) var(--space-4);
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: var(--radius-md);
+    color: #fff;
+    font-size: 15px;
   }
 
-  .phone-input input {
-    flex: 1;
-    min-width: 0;
+  :global(.iti__tel-input:focus) {
+    outline: none;
+    border-color: var(--coral-600);
+  }
+
+  :global(.iti--separate-dial-code .iti__country-container) {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-right: none;
+    border-radius: var(--radius-md) 0 0 var(--radius-md);
+  }
+
+  :global(.iti--separate-dial-code .iti__selected-dial-code) {
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  :global(.iti__country-list) {
+    background: var(--navy-800);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: var(--radius-md);
+    color: #fff;
+    box-shadow: var(--shadow-md);
+  }
+
+  :global(.iti__country) {
+    color: #fff;
+    padding: var(--space-2) var(--space-3);
+  }
+
+  :global(.iti__country.iti__highlight),
+  :global(.iti__country:hover) {
+    background-color: rgba(226, 115, 92, 0.18);
+  }
+
+  :global(.iti__dial-code) {
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  :global(.iti__search-input) {
+    background: rgba(255, 255, 255, 0.06);
+    color: #fff;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  :global(.iti__search-input::placeholder) {
+    color: rgba(255, 255, 255, 0.4);
   }
 
   .form-submit {
