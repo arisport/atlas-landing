@@ -241,6 +241,10 @@
           feedback.textContent =
             "This email is already registered. Check your inbox or contact us.";
           feedback.className = "form-feedback info";
+        } else if (code === "phone_already_registered") {
+          feedback.textContent =
+            "This phone number is already registered. Check your inbox or contact us.";
+          feedback.className = "form-feedback info";
         } else {
           feedback.textContent =
             "Something went wrong. Please try again or email us at aris@myatlas.fit";
