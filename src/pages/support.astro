@@ -1,0 +1,98 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Support — Atlas">
+  <main class="legal">
+    <div class="container">
+      <h1>Support</h1>
+      <p class="updated">We're here to help.</p>
+
+      <h2>Contact us</h2>
+      <p>
+        For any question, bug report, or feedback, email
+        <a href="mailto:aris@myatlas.fit">aris@myatlas.fit</a>. We aim to reply
+        within one business day.
+      </p>
+
+      <h2>Common questions</h2>
+      <h3>I can't sign in</h3>
+      <p>
+        Atlas uses email verification on first sign-in. Check your inbox (and
+        spam folder) for a code from <strong>noreply@myatlas.fit</strong>. If
+        the code doesn't arrive within a few minutes, email
+        <a href="mailto:aris@myatlas.fit">aris@myatlas.fit</a> with the email
+        address you tried.
+      </p>
+
+      <h3>How do I join my gym?</h3>
+      <p>
+        Your gym, trainer, or studio will send you an invitation by email or
+        share a gym code. After you create an account, enter the code or follow
+        the invitation link to join.
+      </p>
+
+      <h3>Can I use Atlas without a gym?</h3>
+      <p>
+        Yes. The base workout tracker is free for everyone. Choose
+        <em>Continue as solo</em> when prompted for a gym code.
+      </p>
+
+      <h3>How do I delete my account?</h3>
+      <p>
+        Email <a href="mailto:aris@myatlas.fit">aris@myatlas.fit</a> from the
+        address registered on your account and we'll delete your data within
+        seven days. You can also delete your account in-app from
+        <em>Settings &rarr; Delete account</em>.
+      </p>
+
+      <a href="/" class="back-link">Back to home</a>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .legal {
+    padding: 80px 0;
+    min-height: 60vh;
+  }
+  h1 {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--navy-700);
+    margin-bottom: 8px;
+  }
+  h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--navy-700);
+    margin-top: 32px;
+    margin-bottom: 12px;
+  }
+  h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--navy-700);
+    margin-top: 20px;
+    margin-bottom: 8px;
+  }
+  .updated {
+    font-size: 13px;
+    color: var(--light-text-tertiary);
+    margin-bottom: 32px;
+  }
+  p {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--light-text-secondary);
+    max-width: 640px;
+    margin-bottom: 16px;
+  }
+  a { color: var(--coral-600); }
+  .back-link {
+    display: inline-block;
+    margin-top: 24px;
+    font-size: 14px;
+    font-weight: 600;
+  }
+</style>
