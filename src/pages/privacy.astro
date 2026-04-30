@@ -7,10 +7,131 @@ import Layout from "../layouts/Layout.astro";
     <div class="container">
       <h1>Privacy Policy</h1>
       <p class="updated">Last updated: April 2026</p>
-      <p>Atlas collects only what is needed to run the platform: your name, email, phone number, and workout data. We do not sell your data to third parties.</p>
-      <p>Workout data belongs to you. If you delete your account, your data is permanently removed.</p>
-      <p>We use error monitoring (Sentry) to fix bugs and analytics (Meta Pixel, TikTok Pixel) on the landing page only to measure ad performance. The mobile app does not contain ad trackers.</p>
-      <p>A full privacy policy will be published before the public launch. If you have questions, contact us at <a href="mailto:aris@myatlas.fit">aris@myatlas.fit</a>.</p>
+
+      <p>
+        This policy explains what personal data Atlas collects, why we collect
+        it, who we share it with, and the rights you have over it. Atlas is
+        operated by Aris Panayiotou as a sole trader (the &ldquo;controller&rdquo;
+        under UK and EU data protection law). Contact:
+        <a href="mailto:aris@myatlas.fit">aris@myatlas.fit</a>.
+      </p>
+
+      <h2>1. What we collect</h2>
+
+      <h3>Account and profile</h3>
+      <ul>
+        <li><strong>Name, email address, phone number</strong> — provided when you register or are invited to a gym.</li>
+        <li><strong>Password</strong> — stored as a one-way hash; we never see it in plain text.</li>
+        <li><strong>Profile preferences</strong> — units (kg / lbs), training goal, gym memberships, role (member, trainer, owner).</li>
+      </ul>
+
+      <h3>Fitness data</h3>
+      <ul>
+        <li><strong>Workouts</strong> — sets, reps, weights, durations, exercise selections, notes.</li>
+        <li><strong>Programs and templates</strong> — programs you build or your trainer assigns to you.</li>
+        <li><strong>Challenges</strong> — challenges you opt into and your progress.</li>
+      </ul>
+
+      <h3>Technical data</h3>
+      <ul>
+        <li><strong>Device push token</strong> — used to deliver notifications via Firebase Cloud Messaging when your gym publishes a program or you receive an invitation.</li>
+        <li><strong>Crash and error reports</strong> — when the app crashes or hits an unexpected error, technical details are sent to our error monitoring service (Sentry) so we can fix bugs. Reports include a hashed user ID so we can correlate fixes to affected accounts.</li>
+        <li><strong>Server logs</strong> — request timestamps, IP addresses, and user-agent strings, kept temporarily for security and debugging.</li>
+      </ul>
+
+      <h3>Landing page (this website)</h3>
+      <ul>
+        <li><strong>Founding-partner application form</strong> — your name, email, gym name (if applicable), and the message you submit.</li>
+        <li><strong>Advertising pixels</strong> — Meta Pixel and TikTok Pixel measure how our paid campaigns perform. These run on the landing page only and never on the mobile app. You can opt out via your browser&rsquo;s tracking-prevention settings.</li>
+      </ul>
+
+      <h2>2. Why we collect it</h2>
+      <ul>
+        <li><strong>To run the service</strong> — authenticate you, sync your workouts, deliver programs from your gym, run challenges, send notifications.</li>
+        <li><strong>To support and improve the app</strong> — fix bugs surfaced via crash reports, monitor performance.</li>
+        <li><strong>To communicate with you</strong> — send transactional emails (verification, password reset, gym invitations).</li>
+        <li><strong>To measure marketing performance</strong> — understand which channels bring people to the landing page (landing page only).</li>
+      </ul>
+
+      <h2>3. Lawful basis</h2>
+      <p>Under UK GDPR / EU GDPR we rely on:</p>
+      <ul>
+        <li><strong>Contract</strong> — to provide the service you sign up for.</li>
+        <li><strong>Legitimate interests</strong> — to keep the service secure, debug crashes, and prevent abuse.</li>
+        <li><strong>Consent</strong> — for landing-page advertising pixels (you can decline via your browser).</li>
+      </ul>
+
+      <h2>4. Who we share it with</h2>
+      <p>We do not sell your data. We use the following sub-processors to operate the platform:</p>
+      <ul>
+        <li><strong>Render</strong> (USA / EU) — hosts our backend servers and database.</li>
+        <li><strong>Cloudflare R2</strong> — stores uploaded media (gym logos, profile pictures).</li>
+        <li><strong>Resend</strong> (USA) — sends transactional emails from <code>noreply@myatlas.fit</code>.</li>
+        <li><strong>Firebase Cloud Messaging</strong> (Google, USA) — delivers push notifications to your device.</li>
+        <li><strong>Sentry</strong> (USA) — collects crash reports and performance traces from the mobile app and backend.</li>
+        <li><strong>Meta and TikTok</strong> — receive landing-page conversion events only (Meta Pixel, TikTok Pixel). Not used in the mobile app.</li>
+      </ul>
+      <p>
+        International transfers to the US rely on the EU&ndash;US Data Privacy
+        Framework or Standard Contractual Clauses, depending on the
+        sub-processor.
+      </p>
+
+      <h2>5. How long we keep it</h2>
+      <ul>
+        <li><strong>Account and fitness data</strong> — until you delete your account.</li>
+        <li><strong>Crash reports</strong> — 90 days, then automatically purged by Sentry.</li>
+        <li><strong>Server logs</strong> — 30 days.</li>
+        <li><strong>Marketing pixels</strong> — managed under Meta&rsquo;s and TikTok&rsquo;s own retention policies.</li>
+      </ul>
+
+      <h2>6. Your rights</h2>
+      <p>Under UK GDPR / EU GDPR you have the right to:</p>
+      <ul>
+        <li>Access the personal data we hold about you.</li>
+        <li>Correct anything inaccurate.</li>
+        <li>Delete your account and the data associated with it.</li>
+        <li>Object to or restrict processing.</li>
+        <li>Export your data in a portable format.</li>
+        <li>Lodge a complaint with the UK Information Commissioner&rsquo;s Office (<a href="https://ico.org.uk" target="_blank" rel="noopener">ico.org.uk</a>) or your local supervisory authority.</li>
+      </ul>
+      <p>
+        To delete your account in-app: <em>Settings &rarr; Delete account</em>.
+        To exercise any other right, email
+        <a href="mailto:aris@myatlas.fit">aris@myatlas.fit</a> from the address
+        on your account. We respond within 30 days.
+      </p>
+
+      <h2>7. Children</h2>
+      <p>
+        Atlas is not directed at children under 13. We do not knowingly collect
+        data from children under 13. If you believe a child has registered,
+        contact <a href="mailto:aris@myatlas.fit">aris@myatlas.fit</a> and we
+        will delete the account.
+      </p>
+
+      <h2>8. Security</h2>
+      <p>
+        All traffic is encrypted in transit (HTTPS / TLS 1.2+). Passwords are
+        hashed using the algorithm provided by Django&rsquo;s authentication
+        framework. We never receive or store payment details &mdash; the app is
+        currently free.
+      </p>
+
+      <h2>9. Changes to this policy</h2>
+      <p>
+        We may update this policy as the platform evolves. The &ldquo;Last
+        updated&rdquo; date at the top will reflect the most recent change. For
+        material changes affecting how we use your data, we will notify you by
+        email or in-app before the change takes effect.
+      </p>
+
+      <h2>10. Contact</h2>
+      <p>
+        Questions, concerns, or requests:
+        <a href="mailto:aris@myatlas.fit">aris@myatlas.fit</a>.
+      </p>
+
       <a href="/" class="back-link">Back to home</a>
     </div>
   </main>
@@ -27,17 +148,43 @@ import Layout from "../layouts/Layout.astro";
     color: var(--navy-700);
     margin-bottom: 8px;
   }
+  h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--navy-700);
+    margin-top: 32px;
+    margin-bottom: 12px;
+  }
+  h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--navy-700);
+    margin-top: 20px;
+    margin-bottom: 8px;
+  }
   .updated {
     font-size: 13px;
     color: var(--light-text-tertiary);
     margin-bottom: 32px;
   }
-  p {
+  p, ul {
     font-size: 15px;
     line-height: 1.7;
     color: var(--light-text-secondary);
     max-width: 640px;
     margin-bottom: 16px;
+  }
+  ul {
+    padding-left: 20px;
+  }
+  li {
+    margin-bottom: 6px;
+  }
+  code {
+    background: rgba(255, 255, 255, 0.06);
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-size: 13px;
   }
   a { color: var(--coral-600); }
   .back-link {
