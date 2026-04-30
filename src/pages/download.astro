@@ -1,14 +1,16 @@
 ---
-/* "Coming soon" page — shown until iOS + Android apps are approved.
-   Once stores are live, restore the smart-redirect logic and replace store URLs. */
+/* iOS is live on the App Store. Android is still in Play Console review.
+   Smart-redirect logic to follow once Android is also live. */
+
+const APP_STORE_URL = "https://apps.apple.com/us/app/atlas-fit/id6764618687";
 ---
 
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="robots" content="noindex" />
-    <title>Atlas — Coming Soon</title>
+    <title>Download Atlas Fit</title>
+    <meta name="description" content="Atlas Fit is live on the App Store. Track your workouts, follow programs from your gym or coach, and join community challenges." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -77,9 +79,14 @@
         color: #fff;
         padding: 12px 20px;
         border-radius: 8px;
+        position: relative;
+        text-decoration: none;
+        transition: transform 120ms ease, background 120ms ease;
+      }
+      a.badge:hover { background: #233459; transform: translateY(-1px); }
+      .badge-pending {
         opacity: 0.5;
         cursor: not-allowed;
-        position: relative;
       }
       .badge svg { flex-shrink: 0; }
       .badge-text { text-align: left; }
@@ -102,23 +109,21 @@
   </head>
   <body>
     <a href="/" class="wordmark">Atlas<span class="dot">.</span></a>
-    <span class="pill">Coming soon</span>
-    <h1>Atlas mobile is on the way</h1>
+    <h1>Download Atlas Fit</h1>
     <p>
-      We're putting the finishing touches on the iOS and Android apps. They'll be on
-      the App Store and Google Play very soon.
+      Atlas Fit is live on the App Store. Android is on the way.
     </p>
-    <div class="badges" aria-hidden="true">
-      <div class="badge">
+    <div class="badges">
+      <a href={APP_STORE_URL} class="badge" target="_blank" rel="noopener" aria-label="Download Atlas Fit on the App Store">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
           <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
         </svg>
         <div class="badge-text">
-          <span class="badge-label">Coming to the</span>
+          <span class="badge-label">Download on the</span>
           <span class="badge-store">App Store</span>
         </div>
-      </div>
-      <div class="badge">
+      </a>
+      <div class="badge badge-pending" aria-disabled="true">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
           <path d="M3 20.5v-17c0-.59.34-1.11.84-1.35L13.69 12l-9.85 9.85c-.5-.24-.84-.76-.84-1.35zm13.81-5.38L6.05 21.34l8.49-8.49 2.27 2.27zm.91-.91L19.99 12l-2.27-2.21-2.56 2.56 2.56 2.56zM6.05 2.66l10.76 6.22-2.27 2.27-8.49-8.49z"/>
         </svg>
