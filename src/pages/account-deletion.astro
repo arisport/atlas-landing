@@ -1,0 +1,156 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Delete your account — Atlas">
+  <main class="legal">
+    <div class="container">
+      <h1>Delete your Atlas account</h1>
+      <p class="updated">Last updated: May 2026</p>
+
+      <p>
+        You can delete your Atlas account at any time. This page explains how
+        to request deletion, what data is removed, and what (if anything) we
+        keep afterwards.
+      </p>
+
+      <h2>How to delete your account</h2>
+
+      <h3>In the app (fastest)</h3>
+      <p>
+        Open Atlas, then go to <em>Settings &rarr; Delete account</em>. Confirm
+        the action when prompted. Your account and personal data are scheduled
+        for deletion immediately and removed within seven days.
+      </p>
+
+      <h3>By email (if you can't access the app)</h3>
+      <p>
+        Email
+        <a href="mailto:aris@myatlas.fit?subject=Delete%20my%20Atlas%20account">aris@myatlas.fit</a>
+        from the email address registered on your account, with the subject
+        <em>&ldquo;Delete my Atlas account&rdquo;</em>. We verify the request
+        against the registered address and complete the deletion within seven
+        days. We may ask one follow-up question to confirm identity if the
+        request looks ambiguous.
+      </p>
+
+      <h2>What gets deleted</h2>
+      <ul>
+        <li><strong>Profile</strong> — name, email, phone number, password hash, units, training goal, profile picture.</li>
+        <li><strong>Workouts</strong> — every workout you've logged: sets, reps, weights, durations, notes.</li>
+        <li><strong>Programs and templates</strong> — programs you built or were assigned, including any custom exercises you added.</li>
+        <li><strong>Challenges</strong> — challenges you opted into and your progress on them.</li>
+        <li><strong>Gym memberships</strong> — your membership records at any gyms or studios you've joined.</li>
+        <li><strong>Push notification tokens</strong> — device tokens used to deliver notifications.</li>
+        <li><strong>Crash reports</strong> — anonymised reports linked to your account ID are scrubbed within 90 days of deletion (Sentry's standard retention).</li>
+      </ul>
+
+      <h2>What we keep, and why</h2>
+      <ul>
+        <li>
+          <strong>Encrypted backups</strong> — for up to 30 days after deletion,
+          your data may still exist in encrypted database backups used for
+          disaster recovery. These backups are not accessible during normal
+          operation and are automatically purged on rotation.
+        </li>
+        <li>
+          <strong>Server logs</strong> — request timestamps, IP addresses, and
+          user-agent strings are retained for 30 days for security and abuse
+          prevention. They contain no fitness or profile data.
+        </li>
+        <li>
+          <strong>Aggregate, anonymised metrics</strong> — counts (total
+          workouts logged, total active users) that no longer reference your
+          identity may be retained indefinitely.
+        </li>
+      </ul>
+
+      <h2>Timeline</h2>
+      <ul>
+        <li><strong>Within seconds</strong> — your account is signed out and login is disabled.</li>
+        <li><strong>Within seven days</strong> — your personal data is removed from production systems.</li>
+        <li><strong>Within thirty days</strong> — encrypted backups containing your data are rotated out and purged.</li>
+        <li><strong>Within ninety days</strong> — crash reports referencing your account ID are purged by Sentry's automatic retention.</li>
+      </ul>
+
+      <h2>Sub-processors</h2>
+      <p>
+        Deletion requests propagate to all sub-processors listed in our
+        <a href="/privacy">Privacy Policy</a>: Render (database), Cloudflare R2
+        (uploaded media), Resend (email logs), Firebase Cloud Messaging (push
+        tokens), and Sentry (crash reports). Marketing pixels (Meta, TikTok)
+        run on the landing page only and have no link to your in-app account.
+      </p>
+
+      <h2>Other rights</h2>
+      <p>
+        Under UK GDPR / EU GDPR you can also request a copy of your data,
+        correct anything inaccurate, or restrict processing without deleting
+        the account. Email
+        <a href="mailto:aris@myatlas.fit">aris@myatlas.fit</a> from the address
+        on your account. We respond within thirty days. Full details are in
+        our <a href="/privacy">Privacy Policy</a>.
+      </p>
+
+      <h2>Contact</h2>
+      <p>
+        Questions about deletion or your data:
+        <a href="mailto:aris@myatlas.fit">aris@myatlas.fit</a>.
+      </p>
+
+      <a href="/" class="back-link">Back to home</a>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .legal {
+    padding: 80px 0;
+    min-height: 60vh;
+  }
+  h1 {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--navy-700);
+    margin-bottom: 8px;
+  }
+  h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--navy-700);
+    margin-top: 32px;
+    margin-bottom: 12px;
+  }
+  h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--navy-700);
+    margin-top: 20px;
+    margin-bottom: 8px;
+  }
+  .updated {
+    font-size: 13px;
+    color: var(--light-text-tertiary);
+    margin-bottom: 32px;
+  }
+  p, ul {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--light-text-secondary);
+    max-width: 640px;
+    margin-bottom: 16px;
+  }
+  ul {
+    padding-left: 20px;
+  }
+  li {
+    margin-bottom: 6px;
+  }
+  a { color: var(--coral-600); }
+  .back-link {
+    display: inline-block;
+    margin-top: 24px;
+    font-size: 14px;
+    font-weight: 600;
+  }
+</style>
