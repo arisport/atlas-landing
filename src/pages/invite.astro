@@ -1,0 +1,151 @@
+---
+/* Fallback page for invitation Universal Links.
+   iOS with Atlas installed: link opens the app directly (Universal Link).
+   Otherwise (Safari/desktop/Android): this page renders with a Get-the-app CTA.
+   The DeepLinkService picks up `token` + `gym_code` from the URL after install. */
+
+const APP_STORE_URL = "https://apps.apple.com/us/app/atlas-fit/id6764618687";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>You're invited to Atlas Fit</title>
+    <meta name="description" content="Accept your Atlas Fit invitation. Install the app to join your gym, coach, or studio." />
+    <meta name="robots" content="noindex" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      body {
+        font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        padding: 24px;
+        background: #F8F9FB;
+        color: #141820;
+        text-align: center;
+      }
+      .wordmark {
+        font-size: 20px;
+        font-weight: 800;
+        color: #1B2A4A;
+        margin-bottom: 32px;
+        text-decoration: none;
+      }
+      .wordmark .dot { color: #E2735C; }
+      .pill {
+        display: inline-block;
+        padding: 6px 12px;
+        border-radius: 999px;
+        background: #E2735C;
+        color: #fff;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        margin-bottom: 16px;
+      }
+      h1 {
+        font-size: clamp(24px, 4vw, 32px);
+        font-weight: 800;
+        margin-bottom: 12px;
+        color: #1B2A4A;
+        letter-spacing: -0.3px;
+      }
+      p {
+        font-size: 15px;
+        line-height: 1.6;
+        color: #4A5268;
+        max-width: 440px;
+        margin-bottom: 32px;
+      }
+      .badges {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-bottom: 24px;
+      }
+      .badge {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background: #1B2A4A;
+        color: #fff;
+        padding: 12px 20px;
+        border-radius: 8px;
+        position: relative;
+        text-decoration: none;
+        transition: transform 120ms ease, background 120ms ease;
+      }
+      a.badge:hover { background: #233459; transform: translateY(-1px); }
+      .badge-pending { opacity: 0.5; cursor: not-allowed; }
+      .badge svg { flex-shrink: 0; }
+      .badge-text { text-align: left; }
+      .badge-label { display: block; font-size: 10px; opacity: 0.8; line-height: 1; }
+      .badge-store { display: block; font-size: 15px; font-weight: 600; line-height: 1.2; margin-top: 2px; }
+      .hint {
+        font-size: 13px;
+        color: #6B7280;
+        max-width: 440px;
+        margin-bottom: 32px;
+      }
+      .back-link {
+        display: inline-block;
+        padding: 10px 20px;
+        background: transparent;
+        color: #1B2A4A;
+        border: 1.5px solid #1B2A4A;
+        border-radius: 999px;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 600;
+        transition: background 0.15s, color 0.15s;
+      }
+      .back-link:hover { background: #1B2A4A; color: #fff; }
+    </style>
+  </head>
+  <body>
+    <a href="/" class="wordmark">Atlas<span class="dot">.</span></a>
+    <span class="pill">You're invited</span>
+    <h1>Join your gym on Atlas Fit</h1>
+    <p>
+      Install Atlas Fit on your iPhone, then tap the invitation link in your
+      email again to accept and join.
+    </p>
+    <div class="badges">
+      <a href={APP_STORE_URL} class="badge" target="_blank" rel="noopener" aria-label="Download Atlas Fit on the App Store">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+        </svg>
+        <div class="badge-text">
+          <span class="badge-label">Download on the</span>
+          <span class="badge-store">App Store</span>
+        </div>
+      </a>
+      <div class="badge badge-pending" aria-disabled="true">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M3 20.5v-17c0-.59.34-1.11.84-1.35L13.69 12l-9.85 9.85c-.5-.24-.84-.76-.84-1.35zm13.81-5.38L6.05 21.34l8.49-8.49 2.27 2.27zm.91-.91L19.99 12l-2.27-2.21-2.56 2.56 2.56 2.56zM6.05 2.66l10.76 6.22-2.27 2.27-8.49-8.49z"/>
+        </svg>
+        <div class="badge-text">
+          <span class="badge-label">Coming to</span>
+          <span class="badge-store">Google Play</span>
+        </div>
+      </div>
+    </div>
+    <p class="hint">
+      Already have Atlas Fit installed? Open this link from the email on your iPhone
+      and it will jump straight into the app.
+    </p>
+    <a href="/" class="back-link">Back to home</a>
+  </body>
+</html>
