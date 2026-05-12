@@ -1,0 +1,16 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "UXY4CKLXAN.fit.myatlas.mobile",
+        "paths": [
+          "/invite",
+          "/invite/*",
+          "/reset-password",
+          "/reset-password/*"
+        ]
+      }
+    ]
+  }
+}
