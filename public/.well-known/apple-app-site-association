@@ -8,7 +8,9 @@
           "/invite",
           "/invite/*",
           "/reset-password",
-          "/reset-password/*"
+          "/reset-password/*",
+          "/open",
+          "/open/*"
         ]
       }
     ]
