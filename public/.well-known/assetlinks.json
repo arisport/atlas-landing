@@ -1,0 +1,13 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "fit.myatlas.mobile",
+      "sha256_cert_fingerprints": [
+        "F4:77:C9:5F:23:6D:E0:34:F5:9B:94:33:97:58:B1:05:DF:9B:8D:FB:A6:28:43:5E:A0:9C:5C:1F:34:67:4E:F0",
+        "3B:72:CE:E5:05:3F:E2:B5:DC:9B:79:7C:EB:3C:7B:F5:40:C5:98:67:C5:BF:D5:03:7F:6C:D6:B2:98:F6:64:7A"
+      ]
+    }
+  }
+]
