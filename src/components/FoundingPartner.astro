@@ -431,12 +431,11 @@ import "intl-tel-input/styles";
     width: 100%;
   }
 
+  /* Re-skin only — width / padding / border-radius left to the
+     intl-tel-input library so separateDialCode flex layout works. */
   :global(.iti__tel-input) {
-    width: 100%;
-    padding: var(--space-3) var(--space-4);
     background: rgba(255, 255, 255, 0.06);
     border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: var(--radius-md);
     color: #fff;
     font-size: 15px;
   }
