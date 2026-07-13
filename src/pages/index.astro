@@ -10,6 +10,20 @@ import Footer from "../components/Footer.astro";
 ---
 
 <Layout title="Atlas — The fitness platform for gyms, coaches, and rehab professionals">
+  {/* Invite-link safety net: the invitation Universal-Link path is /invite.
+     Older / misconfigured links can land on the root with the token in the
+     query (e.g. `/?token=…`). If so, forward to /invite preserving the query
+     so the AASA path matches (app opens) or the /invite fallback page shows.
+     Runs inline during parse (before the hero paints); replace() keeps the
+     broken URL out of history to avoid a back-button loop. */}
+  <script is:inline>
+    (function () {
+      var params = new URLSearchParams(window.location.search);
+      if (params.has("token") || params.has("gym_code")) {
+        window.location.replace("/invite" + window.location.search);
+      }
+    })();
+  </script>
   <Navbar />
   <main>
     <Hero />
