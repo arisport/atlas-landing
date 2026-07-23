@@ -1,10 +1,12 @@
 ---
-/* Fallback page for invitation Universal Links.
-   iOS with Atlas installed: link opens the app directly (Universal Link).
-   Otherwise (Safari/desktop/Android): this page renders with a Get-the-app CTA.
+/* Fallback page for invitation Universal Links / App Links.
+   App installed (iOS/Android): link opens the app directly.
+   Otherwise (Safari/desktop): this page renders with a Get-the-app CTA.
+   Android without the app installed is redirected straight to the Play Store (see head script).
    The DeepLinkService picks up `token` + `gym_code` from the URL after install. */
 
 const APP_STORE_URL = "https://apps.apple.com/us/app/atlas-fit/id6764618687";
+const PLAY_STORE_URL = "https://play.google.com/store/apps/details?id=fit.myatlas.mobile";
 ---
 
 <html lang="en">
@@ -14,6 +16,13 @@ const APP_STORE_URL = "https://apps.apple.com/us/app/atlas-fit/id6764618687";
     <title>You're invited to Atlas Fit</title>
     <meta name="description" content="Accept your Atlas Fit invitation. Install the app to join your gym, coach, or studio." />
     <meta name="robots" content="noindex" />
+    <!-- Android without the app installed: redirect straight to the Play Store.
+         (If the app is installed, the App Link opens the app before this page loads.) -->
+    <script is:inline define:vars={{ PLAY_STORE_URL }}>
+      if (/android/i.test(navigator.userAgent)) {
+        window.location.replace(PLAY_STORE_URL);
+      }
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -88,7 +97,6 @@ const APP_STORE_URL = "https://apps.apple.com/us/app/atlas-fit/id6764618687";
         transition: transform 120ms ease, background 120ms ease;
       }
       a.badge:hover { background: #233459; transform: translateY(-1px); }
-      .badge-pending { opacity: 0.5; cursor: not-allowed; }
       .badge svg { flex-shrink: 0; }
       .badge-text { text-align: left; }
       .badge-label { display: block; font-size: 10px; opacity: 0.8; line-height: 1; }
@@ -132,15 +140,15 @@ const APP_STORE_URL = "https://apps.apple.com/us/app/atlas-fit/id6764618687";
           <span class="badge-store">App Store</span>
         </div>
       </a>
-      <div class="badge badge-pending" aria-disabled="true">
+      <a href={PLAY_STORE_URL} class="badge" target="_blank" rel="noopener" aria-label="Get Atlas Fit on Google Play">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
           <path d="M3 20.5v-17c0-.59.34-1.11.84-1.35L13.69 12l-9.85 9.85c-.5-.24-.84-.76-.84-1.35zm13.81-5.38L6.05 21.34l8.49-8.49 2.27 2.27zm.91-.91L19.99 12l-2.27-2.21-2.56 2.56 2.56 2.56zM6.05 2.66l10.76 6.22-2.27 2.27-8.49-8.49z"/>
         </svg>
         <div class="badge-text">
-          <span class="badge-label">Coming to</span>
+          <span class="badge-label">Get it on</span>
           <span class="badge-store">Google Play</span>
         </div>
-      </div>
+      </a>
     </div>
     <p class="hint">
       Already have Atlas Fit installed? Open this link from the email on your iPhone
