@@ -105,6 +105,8 @@ The decisions above say, honestly, that **it is too early for the full video rel
 - **Start organic B2C content** — post exercise-demo clips (the R2 assets) on TikTok/IG. Free, compounds over the 3–4 months before any paid spend. Start the flywheel early.
 - **Capture pilot footage as classes go live** — record now, publish later when they're public.
 
+> **Update (2026-07-24) — lean landing update SHIPPED.** Done: hero repositioned to the confirmed member-engagement wedge; a **live Booking & passes pillar** added (replacing the false "Booking coming 2026" box); exercise copy flipped to **1,900+ HD video exercises** across the site (catalog switchover #352 confirmed live on prod); persona + founding-partner bullets and SEO metadata refreshed. **Still pending from the review** (tracked as issues): per-page canonical/og:url (#14), consent-gated GDPR pixels (#13), `@astrojs/sitemap` + robots.txt (#15). No video shoot or interactive library yet — deliberately deferred to the "Later" phase below.
+
 **Later (pilot proven + ~3–4 months + budget):**
 - The full video relaunch (montage hero, the exercise-library-that-plays, the shoots) + the pilot case study going public + the ~€100/mo paid B2C engine.
 

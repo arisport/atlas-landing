@@ -1,7 +1,8 @@
 # Atlas Landing — Relaunch Plan (video-first, launch-aligned)
 
-**Status:** proposal for owner decision. Nothing built.
-**Trigger:** apps are live in the stores; the exercise-catalog switchover (#352) activates in ~2 days.
+**Status:** proposal for owner decision. The *video-first cinematic relaunch* below is **not built** — deliberately deferred (see `marketing-strategy.md` §9).
+**Update (2026-07-24):** the **lean subset shipped** instead — new positioning, a live Booking & passes pillar, and the "870+" → "1,900+ HD video exercises" flip. This doc remains the reference for the fuller video-first relaunch when the pilot is proven and there's budget.
+**Trigger (historical):** apps are live in the stores; the exercise-catalog switchover (#352) has since activated and is live on prod.
 
 ---
 
