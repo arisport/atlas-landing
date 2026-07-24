@@ -3,13 +3,13 @@ import Layout from "../layouts/Layout.astro";
 import Navbar from "../components/Navbar.astro";
 import Hero from "../components/Hero.astro";
 import PersonaSwitcher from "../components/PersonaSwitcher.astro";
+import Booking from "../components/Booking.astro";
 import FeatureShowcase from "../components/FeatureShowcase.astro";
 import FoundingPartner from "../components/FoundingPartner.astro";
-import ComingSoon from "../components/ComingSoon.astro";
 import Footer from "../components/Footer.astro";
 ---
 
-<Layout title="Atlas — The fitness platform for gyms, coaches, and rehab professionals">
+<Layout title="Atlas — The gym platform your members actually want to open">
   {/* Invite-link safety net: the invitation Universal-Link path is /invite.
      Older / misconfigured links can land on the root with the token in the
      query (e.g. `/?token=…`). If so, forward to /invite preserving the query
@@ -28,6 +28,7 @@ import Footer from "../components/Footer.astro";
   <main>
     <Hero />
     <PersonaSwitcher />
+    <Booking />
     <FeatureShowcase />
 
     <section class="cta-bridge">
@@ -38,7 +39,6 @@ import Footer from "../components/Footer.astro";
     </section>
 
     <FoundingPartner />
-    <ComingSoon />
   </main>
   <Footer />
 <style>
