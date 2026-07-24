@@ -1,0 +1,23 @@
+---
+/* /apply — clean, share-safe redirect to the homepage application form (#apply).
+   Link fields (Instagram bio, etc.) encode "#" to "%23", which breaks the
+   in-page anchor. This gives us a hash-free URL — https://myatlas.fit/apply —
+   that forwards to /#apply. Mirrors the /invite forwarding pattern in index.astro. */
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <meta http-equiv="refresh" content="0; url=/#apply" />
+    <link rel="canonical" href="https://myatlas.fit/#apply" />
+    <title>Apply — Atlas</title>
+    <script is:inline>
+      window.location.replace("/#apply");
+    </script>
+  </head>
+  <body>
+    <p>Redirecting to the application form&hellip; <a href="/#apply">Continue</a></p>
+  </body>
+</html>
