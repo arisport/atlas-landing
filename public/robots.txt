@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+# Utility / noindex pages
+Disallow: /open
+Disallow: /invite
+Disallow: /apply
+Disallow: /reset-password
+
+Sitemap: https://myatlas.fit/sitemap-index.xml

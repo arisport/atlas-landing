@@ -2,12 +2,18 @@
 interface Props {
   title: string;
   description?: string;
+  canonical?: string;
 }
 
 const {
   title,
   description = "Atlas runs your gym's classes, bookings and passes — and gives every member a free training app with 1,900+ exercises, HD video demos, programs and progress tracking.",
+  canonical,
 } = Astro.props;
+
+// Per-page canonical + og:url, derived from the page's own URL (falls back to
+// Astro.site). Prevents every page self-canonicalizing to the homepage.
+const canonicalURL = canonical ?? new URL(Astro.url.pathname, Astro.site).href;
 ---
 
 <!doctype html>
@@ -32,7 +38,7 @@ const {
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://myatlas.fit" />
+    <meta property="og:url" content={canonicalURL} />
     <meta property="og:image" content="https://myatlas.fit/images/og-image.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -44,36 +50,7 @@ const {
     <meta name="twitter:image" content="https://myatlas.fit/images/og-image.png" />
 
     <!-- Canonical -->
-    <link rel="canonical" href="https://myatlas.fit" />
-
-    <!-- Meta Pixel -->
-    <script is:inline>
-      !function(f,b,e,v,n,t,s)
-      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-      n.queue=[];t=b.createElement(e);t.async=!0;
-      t.src=v;s=b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t,s)}(window, document,'script',
-      'https://connect.facebook.net/en_US/fbevents.js');
-      fbq('init', '938820135529873');
-      fbq('track', 'PageView');
-    </script>
-    <noscript>
-      <img height="1" width="1" style="display:none"
-        src="https://www.facebook.com/tr?id=938820135529873&ev=PageView&noscript=1" />
-    </noscript>
-
-    <!-- TikTok Pixel -->
-    <script is:inline>
-      !function (w, d, t) {
-        w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
-        var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
-        ;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
-        ttq.load('D7KRGBRC77UDI5AAGS9G');
-        ttq.page();
-      }(window, document, 'ttq');
-    </script>
+    <link rel="canonical" href={canonicalURL} />
   </head>
   <body>
     <a href="#features" class="skip-to-content">Skip to content</a>
@@ -103,9 +80,155 @@ const {
     </script>
 
     <slot />
+
+    <!-- Cookie consent — advertising pixels (Meta + TikTok) load ONLY after opt-in -->
+    <div id="cookie-consent" class="cookie-consent" role="dialog" aria-live="polite"
+      aria-label="Cookie consent" hidden>
+      <p class="cookie-consent-text">
+        We use Meta and TikTok cookies to measure how our ads perform. They load
+        only if you accept. See our <a href="/privacy">Privacy Policy</a>.
+      </p>
+      <div class="cookie-consent-actions">
+        <button type="button" id="cookie-decline" class="cookie-btn cookie-btn-ghost">Decline</button>
+        <button type="button" id="cookie-accept" class="cookie-btn cookie-btn-primary">Accept</button>
+      </div>
+    </div>
+
+    <script is:inline>
+      (function () {
+        var KEY = "atlas-ad-consent";
+
+        function loadMeta() {
+          if (window.fbq) return;
+          !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+          n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+          n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+          t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+          document,'script','https://connect.facebook.net/en_US/fbevents.js');
+          fbq('init', '938820135529873');
+          fbq('track', 'PageView');
+        }
+
+        function loadTikTok() {
+          if (window.ttq && window.ttq._atlasLoaded) return;
+          !function (w, d, t) {
+            w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
+            var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
+            ;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
+            ttq.load('D7KRGBRC77UDI5AAGS9G');
+            ttq.page();
+            ttq._atlasLoaded=true;
+          }(window, document, 'ttq');
+        }
+
+        function loadPixels() { loadMeta(); loadTikTok(); }
+
+        var stored = null;
+        try { stored = localStorage.getItem(KEY); } catch (e) {}
+
+        if (stored === "granted") { loadPixels(); return; }
+        if (stored === "denied") { return; }
+
+        var banner = document.getElementById("cookie-consent");
+        if (!banner) return;
+        banner.hidden = false;
+        document.getElementById("cookie-accept").addEventListener("click", function () {
+          try { localStorage.setItem(KEY, "granted"); } catch (e) {}
+          banner.hidden = true;
+          loadPixels();
+        });
+        document.getElementById("cookie-decline").addEventListener("click", function () {
+          try { localStorage.setItem(KEY, "denied"); } catch (e) {}
+          banner.hidden = true;
+        });
+      })();
+    </script>
   </body>
 </html>
 
 <style is:global>
   @import "../styles/global.css";
+</style>
+
+<style>
+  .cookie-consent {
+    position: fixed;
+    left: 16px;
+    right: 16px;
+    bottom: 16px;
+    z-index: 200;
+    max-width: 720px;
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px 20px;
+    background: var(--navy-800);
+    color: #fff;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .cookie-consent[hidden] {
+    display: none;
+  }
+
+  @media (min-width: 640px) {
+    .cookie-consent {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+  }
+
+  .cookie-consent-text {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .cookie-consent-text a {
+    color: var(--coral-300);
+    text-decoration: underline;
+  }
+
+  .cookie-consent-actions {
+    display: flex;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .cookie-btn {
+    padding: 8px 18px;
+    border-radius: var(--radius-full);
+    font-family: var(--font-primary);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: background-color var(--duration-fast) var(--ease-default),
+      border-color var(--duration-fast) var(--ease-default);
+  }
+
+  .cookie-btn-primary {
+    background: var(--coral-600);
+    color: #fff;
+  }
+
+  .cookie-btn-primary:hover {
+    background: var(--coral-700);
+  }
+
+  .cookie-btn-ghost {
+    background: transparent;
+    color: rgba(255, 255, 255, 0.8);
+    border-color: rgba(255, 255, 255, 0.25);
+  }
+
+  .cookie-btn-ghost:hover {
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.5);
+  }
 </style>
