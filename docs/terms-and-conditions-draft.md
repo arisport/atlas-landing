@@ -55,10 +55,10 @@ The Atlas app is **free for Members** and doesn't require a subscription. If you
 
 If you're accepted as a **Founding Partner**, then unless we agree otherwise in writing:
 
-- You receive **12 months of Atlas Pro at no charge**, starting when your account is set up.
+- You receive **6 months of Atlas Pro at no charge**, starting when your account is set up.
 - We may help set up your account (classes, passes, initial programs) as part of onboarding.
 - There is **no long-term lock-in** during the free period, and no payment card is required to start.
-- Before the 12-month period ends we'll **notify you** (see §19) so you can decide whether to continue on a paid plan. If you don't, your account moves to our **then-current free tier** (or is limited accordingly) — **we won't charge you without your agreement.** `[[Confirm this "lands on free tier, no auto-charge" behaviour matches the product.]]`
+- Before the 6-month period ends we'll **notify you** (see §19) so you can decide whether to continue on a paid plan. If you don't, your account moves to our **then-current free tier** (or is limited accordingly) — **we won't charge you without your agreement.** `[[Confirm this "lands on free tier, no auto-charge" behaviour matches the product.]]`
 
 The Founding Partner offer is discretionary and limited. We may set reasonable usage limits per plan tier.
 
