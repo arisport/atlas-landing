@@ -154,6 +154,12 @@ import "intl-tel-input/styles";
           <textarea id="message" name="message" rows="3"></textarea>
         </div>
 
+        {/* Honeypot: hidden from real users; bots that fill it are dropped. */}
+        <div class="hp-field" aria-hidden="true">
+          <label for="company_website">Company website (leave blank)</label>
+          <input type="text" id="company_website" name="company_website" tabindex="-1" autocomplete="off" />
+        </div>
+
         <button type="submit" class="btn btn-coral form-submit" id="form-submit">
           Get Free Early Access
         </button>
@@ -205,6 +211,18 @@ import "intl-tel-input/styles";
     submitBtn.textContent = "Submitting...";
 
     const data = Object.fromEntries(new FormData(form)) as Record<string, string>;
+
+    // Honeypot: real users never fill this hidden field; bots often do.
+    // Pretend success without hitting the API so the bot doesn't retry.
+    if (data.company_website) {
+      feedback.textContent = "Thanks! We'll be in touch within 24 hours.";
+      feedback.className = "form-feedback success";
+      form.reset();
+      submitBtn.textContent = "Application Sent";
+      return;
+    }
+    delete data.company_website;
+
     data.phone_number = iti.getNumber();  // E.164 format, e.g. "+35799138987"
 
     try {
@@ -498,6 +516,15 @@ import "intl-tel-input/styles";
 
   :global(.iti__search-input::placeholder) {
     color: rgba(255, 255, 255, 0.4);
+  }
+
+  /* Honeypot — off-screen, not display:none (bots skip display:none) */
+  .hp-field {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
   }
 
   .form-submit {
