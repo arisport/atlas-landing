@@ -112,7 +112,7 @@ import "intl-tel-input/styles";
         <div class="form-row">
           <div class="form-group">
             <label for="contact_name">Name</label>
-            <input type="text" id="contact_name" name="contact_name" required autocomplete="name" />
+            <input type="text" id="contact_name" name="contact_name" required maxlength="255" pattern=".*\S.*" autocomplete="name" />
           </div>
           <div class="form-group">
             <label for="email">Email</label>
@@ -134,7 +134,7 @@ import "intl-tel-input/styles";
           </div>
           <div class="form-group">
             <label for="gym_name">Gym / practice name</label>
-            <input type="text" id="gym_name" name="gym_name" required />
+            <input type="text" id="gym_name" name="gym_name" required maxlength="255" pattern=".*\S.*" />
           </div>
         </div>
 
@@ -176,6 +176,24 @@ import "intl-tel-input/styles";
 
   const form = document.getElementById("apply-form") as HTMLFormElement;
   const feedback = document.getElementById("form-feedback")!;
+
+  // atlas#1221: the friendly line for each name field the API refuses (a link or an address).
+  // maxlength and the not-only-spaces pattern on both inputs keep every OTHER server error on
+  // these fields from reaching the API, so a 400 naming one of them is this refusal.
+  const NAME_REFUSAL_COPY: Record<string, string> = {
+    contact_name: "Please enter just your name, without a web or email address.",
+    gym_name: "Please enter just your studio's name, without a web or email address.",
+  };
+
+  // The fields a validation_error names ("contact_name: … gym_name: …"), in form order, if they
+  // are all name fields; otherwise null, and the generic message stands.
+  function nameRefusal(message: unknown): string[] | null {
+    if (typeof message !== "string") return null;
+    const named = [...message.matchAll(/(?:^|\s)([a-z_]+): /g)].map((m) => m[1]);
+    if (named.length === 0 || !named.every((field) => field in NAME_REFUSAL_COPY)) return null;
+    return Object.keys(NAME_REFUSAL_COPY).filter((field) => named.includes(field));
+  }
+
   const submitBtn = document.getElementById("form-submit") as HTMLButtonElement;
   const phoneInput = document.getElementById("phone_number") as HTMLInputElement;
 
@@ -251,6 +269,7 @@ import "intl-tel-input/styles";
       } else {
         const body = await res.json().catch(() => null);
         const code = body?.code;
+        const refusedNames = code === "validation_error" ? nameRefusal(body?.message) : null;
 
         if (code === "application_already_pending") {
           feedback.textContent =
@@ -264,6 +283,12 @@ import "intl-tel-input/styles";
           feedback.textContent =
             "This phone number is already registered. Check your inbox or contact us.";
           feedback.className = "form-feedback info";
+        } else if (refusedNames) {
+          // The API refuses a name carrying a link or an address (atlas#1221). Its message is
+          // "<field>: <text>", so map on the FIELD named, never show the raw text.
+          feedback.textContent = refusedNames.map((field) => NAME_REFUSAL_COPY[field]).join(" ");
+          feedback.className = "form-feedback error";
+          (document.getElementById(refusedNames[0]) as HTMLInputElement).focus();
         } else {
           feedback.textContent =
             "Something went wrong. Please try again or email us at aris@myatlas.fit";
