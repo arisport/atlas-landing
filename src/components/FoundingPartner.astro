@@ -195,6 +195,23 @@ import "intl-tel-input/styles";
   }
 
   const submitBtn = document.getElementById("form-submit") as HTMLButtonElement;
+
+  // The success the applicant sees (atlas#1223, owner-approved 2026-10-17). The honeypot branch
+  // renders exactly this too (markup, class, reset, button text), so a bot can't tell them apart.
+  const SUCCESS_HTML =
+    '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" style="display:inline-block;vertical-align:middle;margin-right:8px"><circle cx="12" cy="12" r="12" fill="var(--teal-100)"/><path d="M7 12l4 4 6-6" stroke="var(--teal-700)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>' +
+    "Thanks, we've got your application! You'll get a confirmation email shortly." +
+    '<br><span style="opacity:0.7;font-size:13px">' +
+    "We'll be in touch personally to arrange a short call, to learn how you run things and show you how Atlas would fit." +
+    "</span>";
+
+  function showSuccess() {
+    feedback.innerHTML = SUCCESS_HTML;
+    feedback.className = "form-feedback success";
+    form.reset();
+    // Keep the button disabled after success: no re-submit needed.
+    submitBtn.textContent = "Application Sent";
+  }
   const phoneInput = document.getElementById("phone_number") as HTMLInputElement;
 
   const API_URL = "https://api.myatlas.fit/api/v1/onboarding/apply/";
@@ -233,10 +250,7 @@ import "intl-tel-input/styles";
     // Honeypot: real users never fill this hidden field; bots often do.
     // Pretend success without hitting the API so the bot doesn't retry.
     if (data.company_website) {
-      feedback.textContent = "Thanks! We'll be in touch within 24 hours.";
-      feedback.className = "form-feedback success";
-      form.reset();
-      submitBtn.textContent = "Application Sent";
+      showSuccess();
       return;
     }
     delete data.company_website;
@@ -251,9 +265,7 @@ import "intl-tel-input/styles";
       });
 
       if (res.ok) {
-        feedback.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" style="display:inline-block;vertical-align:middle;margin-right:8px"><circle cx="12" cy="12" r="12" fill="var(--teal-100)"/><path d="M7 12l4 4 6-6" stroke="var(--teal-700)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>Thanks! We\'ll be in touch within 24 hours.<br><span style="opacity:0.7;font-size:13px">We\'ll set up your gym, walk you through the platform, and get your first members invited.</span>';
-        feedback.className = "form-feedback success";
-        form.reset();
+        showSuccess();
 
         // Fire conversion events
         if (typeof window.fbq === "function") {
@@ -263,8 +275,6 @@ import "intl-tel-input/styles";
           window.ttq.track("SubmitForm");
         }
 
-        // Keep button disabled after success — no re-submit needed
-        submitBtn.textContent = "Application Sent";
         return;
       } else {
         const body = await res.json().catch(() => null);
@@ -273,7 +283,7 @@ import "intl-tel-input/styles";
 
         if (code === "application_already_pending") {
           feedback.textContent =
-            "You already have a pending application. We'll be in touch soon.";
+            "You already have a pending application. We'll be in touch personally to arrange a short call.";
           feedback.className = "form-feedback info";
         } else if (code === "email_already_registered") {
           feedback.textContent =
